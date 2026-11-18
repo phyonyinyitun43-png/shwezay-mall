@@ -108,9 +108,9 @@
   <!-- STICKY HEADER (PURE CUSTOMER POV BY DEFAULT — ADMIN HIDDEN) -->
   <header class="sticky top-0 z-30 glass-bar border-b border-slate-200/80 dark:border-slate-800/80">
     <div class="max-w-5xl mx-auto px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
-      <!-- Brand Identity (Secret: Tap Logo 5 times to open Owner Admin PIN Modal) -->
-      <div class="flex items-center gap-2.5">
-        <div id="secretLogoTrigger" onclick="handleLogoSecretTap()" class="w-10 h-10 rounded-2xl pay-gradient flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-bold text-lg select-none cursor-pointer active:scale-95 transition" title="ShweZay Mall">
+      <!-- Brand Identity (Secret: Tap Logo or Title 5 times to open Owner Admin Login Modal) -->
+      <div id="secretLogoTrigger" onclick="handleLogoSecretTap()" style="touch-action: manipulation;" class="flex items-center gap-2.5 select-none cursor-pointer active:scale-95 transition" title="ShweZay Mall (Tap 5 times for Owner Login)">
+        <div id="secretLogoIconBox" class="w-10 h-10 rounded-2xl pay-gradient flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-bold text-lg transition">
           🛍️
         </div>
         <div>
@@ -124,7 +124,7 @@
         </div>
       </div>
 
-      <!-- Owner Mode Indicator (ONLY visible when unlocked via secret PIN or ?admin=1) -->
+      <!-- Owner Mode Indicator (ONLY visible when unlocked via Admin Email & Password) -->
       <div id="adminUnlockedBar" class="hidden items-center bg-slate-900 text-white px-3 py-1.5 rounded-2xl border border-amber-500/50 gap-2 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
         <span class="text-xs font-bold text-amber-300">🔐 ဆိုင်ရှင် Admin Mode</span>
@@ -135,7 +135,6 @@
 
       <!-- Utility Controls: Customer Account, Sound, Notifications, Dark Mode -->
       <div class="flex items-center gap-1.5">
-        <!-- Customer Account / Auto-Login Profile Button (No Admin button shown to public) -->
         <button id="customerAccountBtn" type="button" onclick="openCustomerAuthModal()" class="px-2.5 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 flex items-center gap-1.5 text-xs font-bold transition" title="Customer Account (Auto-Login Active)">
           <span>👤</span>
           <span id="headerCustomerNameLabel" class="max-w-[110px] truncate">အကောင့်ဝင်ရန်</span>
@@ -159,7 +158,6 @@
 
     <!-- ========================================== -->
     <!-- VIEW 0: CUSTOMER REGISTER / LOGIN GATEWAY  -->
-    <!-- (Shown only when no Customer is saved yet) -->
     <!-- ========================================== -->
     <section id="customerAuthGateSection" class="hidden py-6">
       <div class="max-w-md mx-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden text-slate-900 dark:text-slate-100">
@@ -173,7 +171,7 @@
           </p>
         </div>
 
-        <!-- Tabs: Login vs Register (Defaults to Login Screen on entry) -->
+        <!-- Tabs: Login vs Register -->
         <div class="grid grid-cols-2 p-2 bg-slate-100 dark:bg-slate-800/80 m-4 rounded-2xl">
           <button type="button" id="custAuthTabLoginBtn" onclick="switchCustomerAuthTab('login')" class="py-2 rounded-xl text-xs font-extrabold bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition">
             🔑 အကောင့်ဝင်ရန် (Login)
@@ -183,7 +181,7 @@
           </button>
         </div>
 
-        <!-- CUSTOMER LOGIN FORM (Shown First) -->
+        <!-- CUSTOMER LOGIN FORM -->
         <div id="custLoginFormPane" class="px-6 pb-6 space-y-3.5 text-slate-900 dark:text-slate-100">
           <div>
             <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
@@ -251,7 +249,7 @@
             </div>
             <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">စိတ်ကြိုက်ပစ္စည်းရွေးပြီး ငွေလွှဲပြေစာဖြင့် အော်ဒါတင်ပါ</h2>
             <p class="text-xs sm:text-sm text-indigo-100 leading-relaxed">
-              သင်နှစ်သက်ရာ ငွေပေးချေမှုစနစ်ကို ရွေးချယ်လိုက်သည်နှင့် သက်ဆိုင်ရာ ငွေလွှဲအကောင့်များ အလိုအလျောက် ပြောင်းလဲပေးပြီး Background စနစ်မှ အချိန်နှင့်တစ်ပြေးညီ အတည်ပြုပေးပါသည်။
+              သင်နှစ်သက်ရာ ငွေပေးချေမှုစနစ်ကို ရွေးချယ်လိုက်သည်နှင့် သက်ဆိုင်ရာ ငွေလွှဲအကောင့်များ အလိုအလျောက် ပြောင်းလဲပေးပြီး ငွေလွှဲပြေစာ ပူးတွဲတင်သွင်းနိုင်ပါသည်။
             </p>
           </div>
           <div class="flex sm:flex-col gap-2 shrink-0">
@@ -287,7 +285,6 @@
 
       <!-- CUSTOMER SUB-VIEW 1: PRODUCT CATALOG -->
       <div id="customerCatalogPane" class="space-y-4">
-        <!-- Search & Category Filter Row -->
         <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
           <div class="relative flex-1">
             <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">🔍</span>
@@ -310,7 +307,7 @@
           </div>
           <div class="flex items-center gap-2 self-start sm:self-auto px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800 text-sky-700 dark:text-sky-300 text-xs font-semibold">
             <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
-            <span>✈️ Telegram Bot Live Sync ချိတ်ဆက်ထားသည်</span>
+            <span>✈️ Telegram Dual-Bot Live Sync ချိတ်ဆက်ထားသည်</span>
           </div>
         </div>
         <div id="customerOrdersList" class="space-y-3.5"></div>
@@ -320,7 +317,6 @@
 
     <!-- ========================================== -->
     <!-- VIEW 2: HIDDEN OWNER ADMIN WORKSPACE       -->
-    <!-- (Only accessible via 5-Tap Logo or ?admin=1) -->
     <!-- ========================================== -->
     <section id="adminViewSection" class="hidden space-y-5">
       <div class="rounded-3xl bg-slate-900 text-white p-5 border border-slate-800 shadow-lg">
@@ -332,13 +328,17 @@
             <div>
               <div class="flex items-center gap-2">
                 <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-wider">Owner Admin Dashboard</span>
-                <span class="text-xs text-slate-400">Protected Workspace</span>
+                <span class="text-xs text-slate-400">Cloud Sync Active</span>
               </div>
               <h2 class="text-lg sm:text-xl font-extrabold mt-0.5">ဆိုင်ရှင် မိုဘိုင်း Admin ထိန်းချုပ်ရေးစနစ်</h2>
               <p class="text-xs text-slate-300">ဝယ်ယူသူ အကောင့်အချက်အလက်များ၊ ငွေလွှဲပြေစာများနှင့် ကုန်ပစ္စည်းများကို စီမံခန့်ခွဲရန်</p>
             </div>
           </div>
           <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="syncAllCloudDataNow(true)" class="px-3.5 py-2.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+              <span>🔄</span>
+              <span>User များထံ Sync ပို့မည်</span>
+            </button>
             <button type="button" onclick="openProductModal()" class="px-3.5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
               <span>➕</span>
               <span>ပစ္စည်းအသစ်ထည့်ရန်</span>
@@ -387,7 +387,7 @@
           📦 ကုန်ပစ္စည်းနှင့် Stock ပြင်ဆင်ရန်
         </button>
         <button type="button" id="adminTabSettingsBtn" onclick="switchAdminSubTab('settings')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 transition">
-          ⚙️ ငွေပေးချေမှုနှင့် Admin အကောင့်စီမံရန်
+          ⚙️ ငွေပေးချေမှုနှင့် Telegram Bots စီမံရန်
         </button>
       </div>
 
@@ -407,8 +407,8 @@
       <div id="adminUsersPane" class="hidden space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
           <div>
-            <h3 class="font-bold text-sm sm:text-base">👥 အကောင့်ဖွင့်ထားသော ဝယ်ယူသူများ (Registered Customer Accounts)</h3>
-            <p class="text-xs text-slate-500">Customer တစ်ဦးချင်းစီ၏ အမည်၊ Email/ဖုန်းနံပါတ်၊ Password၊ လိပ်စာနှင့် ဝယ်ယူမှုမှတ်တမ်းများကို Admin မှ တိုက်ရိုက်ကြည့်ရှုစစ်ဆေးနိုင်ပါသည်။</p>
+            <h3 class="font-bold text-sm sm:text-base">👥 အကောင့်ဖွင့်ထားသော ဝယ်ယူသူအားလုံး (All Registered Customer Accounts)</h3>
+            <p class="text-xs text-slate-500">Customer အသစ်တိုင်း အကောင့်ဖွင့်/Login ဝင်လိုက်သည်နှင့် ဤစာရင်းတွင် အကန့်အသတ်မရှိ တိုးလာမည်ဖြစ်ပြီး Telegram User Login Bot ဆီသို့လည်း တိုက်ရိုက်ပို့ပေးပါသည်။</p>
           </div>
           <div class="relative w-full sm:w-64">
             <input id="adminUserSearchInput" type="text" oninput="renderAdminUsers()" placeholder="အမည်၊ ဖုန်း သို့မဟုတ် Email ရှာရန်..." class="w-full pl-3 pr-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
@@ -421,8 +421,8 @@
       <div id="adminProductsPane" class="hidden space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
           <div>
-            <h3 class="font-bold text-sm sm:text-base">လက်ရှိ ကုန်ပစ္စည်းစာရင်း</h3>
-            <p class="text-xs text-slate-500">ဈေးနှုန်းနှင့် Stock လက်ကျန်များကို တိုက်ရိုက်ပြင်ဆင်နိုင်ပါသည်။</p>
+            <h3 class="font-bold text-sm sm:text-base">လက်ရှိ ကုန်ပစ္စည်းစာရင်း (Admin Edit → User Storefront Auto-Sync)</h3>
+            <p class="text-xs text-slate-500">ဈေးနှုန်း၊ ပုံ၊ Stock လက်ကျန်များကို ပြင်ဆင်လိုက်သည်နှင့် Customer များဘက်သို့ အလိုအလျောက် Sync ပြောင်းလဲပေးပါမည်။</p>
           </div>
           <button type="button" onclick="openProductModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-sm">
             ➕ ကုန်ပစ္စည်းအသစ် ထည့်သွင်းရန်
@@ -449,11 +449,17 @@
               <input id="newPayHolderInput" type="text" placeholder="U Phyo Nyi Nyi Tun" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs" />
             </div>
             <div>
-              <label class="block text-[11px] font-semibold mb-1">Icon &amp; အမျိုးအစား</label>
+              <label class="block text-[11px] font-semibold mb-1">Logo &amp; အမျိုးအစား</label>
               <div class="flex gap-1.5">
-                <input id="newPayIconInput" type="text" value="💙" class="w-12 px-2 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-center" />
+                <select id="newPayIconInput" class="w-24 px-2 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
+                  <option value="KBZPay">KBZPay</option>
+                  <option value="WavePay">WavePay</option>
+                  <option value="AYAPay">AYA Pay</option>
+                  <option value="CBPay">CB Pay</option>
+                  <option value="💳">💳 Card</option>
+                </select>
                 <select id="newPayTypeInput" class="flex-1 px-2 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs">
-                  <option value="wallet">ငွေလွှဲပြေစာလို</option>
+                  <option value="wallet">ပြေစာလို</option>
                   <option value="cod">COD</option>
                 </select>
               </div>
@@ -467,7 +473,7 @@
           <div id="adminPaymentMethodsList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5"></div>
         </div>
 
-        <!-- Direct Telegram Bot Integration Card (No n8n Required) -->
+        <!-- Dual Telegram Bots Configuration Card -->
         <div class="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
@@ -475,34 +481,41 @@
                 ✈️
               </div>
               <div>
-                <h3 class="font-bold text-base">Telegram Bot တိုက်ရိုက်ချိတ်ဆက်ရန် (Direct Order Alerts + ✅ ငွေလွှဲအတည်ပြုပါ Button)</h3>
-                <p class="text-xs text-slate-500">Customer အော်ဒါတင်လိုက်သည်နှင့် Telegram Bot မှ အချက်အလက်များနှင့်အတူ <strong>"✅ ငွေလွှဲအတည်ပြုပါ"</strong> ခလုတ်ပါ ပို့ပေးပါမည်။ Bot မှ ထိုခလုတ်ကို နှိပ်လိုက်သည်နှင့် Customer ဘက်သို့ ချက်ချင်း Order Confirmed ဖြစ်သွားပါမည်။</p>
+                <h3 class="font-bold text-base">Telegram Dual-Bot စနစ် (Bot ၂ ကောင် တိုက်ရိုက်ချိတ်ဆက်ပြီး)</h3>
+                <p class="text-xs text-slate-500">Bot (၁) သည် ငွေလွှဲပြေစာနှင့် Order Confirm အတွက်ဖြစ်ပြီး၊ Bot (၂) သည် User Login / Register ဝင်တိုင်း အကြောင်းကြားရန် အသင့်ထည့်သွင်းထားပါသည်။</p>
               </div>
             </div>
             <label class="flex items-center gap-2 text-xs font-bold cursor-pointer bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 px-3 py-1.5 rounded-xl border border-sky-200 dark:border-sky-800 self-start">
               <input id="telegramEnabledCheck" type="checkbox" checked class="rounded text-sky-600" />
-              <span>Bot Auto-Send &amp; Live Confirm ဖွင့်ထားမည်</span>
+              <span>Dual-Bot Auto-Send ဖွင့်ထားမည်</span>
             </label>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
             <div>
-              <label for="telegramBotTokenInput" class="block text-[11px] font-bold mb-1">Telegram Bot Token (@BotFather မှရသော Token) *</label>
-              <input id="telegramBotTokenInput" type="text" placeholder="ဥပမာ - 7812345678:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
+              <label for="telegramBotTokenInput" class="block text-[11px] font-bold mb-1">1️⃣ Order &amp; Payment Confirm Bot Token *</label>
+              <input id="telegramBotTokenInput" type="text" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
             </div>
             <div>
-              <label for="telegramChatIdInput" class="block text-[11px] font-bold mb-1">Admin Telegram Chat ID (သို့မဟုတ် Group/Channel ID) *</label>
-              <input id="telegramChatIdInput" type="text" placeholder="ဥပမာ - 123456789 သို့မဟုတ် -1001234567890" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
+              <label for="telegramAuthBotTokenInput" class="block text-[11px] font-bold mb-1">2️⃣ User Login / Register Alert Bot Token *</label>
+              <input id="telegramAuthBotTokenInput" type="text" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
+            </div>
+            <div>
+              <label for="telegramChatIdInput" class="block text-[11px] font-bold mb-1">Admin Telegram Account ID *</label>
+              <input id="telegramChatIdInput" type="text" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
             </div>
           </div>
 
           <div class="flex flex-wrap items-center justify-between gap-2">
             <p id="telegramStatusIndicator" class="text-[11px] text-slate-500 dark:text-slate-400">
-              💡 Telegram တွင် <strong>@BotFather</strong> မှ Bot Token ယူပြီး <strong>@userinfobot</strong> မှ သင့် Chat ID ကို ယူ၍ ထည့်သွင်းပါ (Bot ကို /start အရင်နှိပ်ထားရန် လိုအပ်ပါသည်)။
+              💡 <strong>အရေးကြီးချက်:</strong> Telegram တွင် သင့် Bot ၂ ကောင်လုံးကို ရှာပြီး <strong>Start (/start)</strong> ခလုတ် တစ်ချက်စီ နှိပ်ထားပေးပါ (Start မနှိပ်ထားပါက Telegram မှ စာပို့ခွင့် မပြုပါ)။
             </p>
             <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="testUserLoginBotConnection()" class="px-3.5 py-2 rounded-xl bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-950 dark:hover:bg-indigo-900 text-indigo-700 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800 font-bold text-xs transition">
+                👤 Login Bot စမ်းသပ်ရန်
+              </button>
               <button type="button" onclick="testTelegramBotConnection()" class="px-3.5 py-2 rounded-xl bg-sky-100 hover:bg-sky-200 dark:bg-sky-950 dark:hover:bg-sky-900 text-sky-700 dark:text-sky-300 border border-sky-300 dark:border-sky-800 font-bold text-xs transition">
-                🧪 စမ်းသပ် Message ပို့ကြည့်ရန်
+                🧪 Payment Bot စမ်းသပ်ရန်
               </button>
               <button type="button" onclick="saveTelegramSettings()" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-sm transition">
                 💾 Telegram Bot သိမ်းဆည်းမည်
@@ -511,11 +524,11 @@
           </div>
         </div>
 
-        <!-- Admin Credentials Manager (Only accessible inside Admin Dashboard) -->
+        <!-- Admin Credentials Manager -->
         <div class="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
           <div>
             <h3 class="font-bold text-base">🔐 ဆိုင်ရှင် Admin Email &amp; Password ပြောင်းလဲရန်</h3>
-            <p class="text-xs text-slate-500">သာမန် User များ Admin နေရာသို့ ဝင်ရောက်မရနိုင်စေရန် Admin အကောင့်ကို ဆိုင်ရှင်သီးသန့် ဤနေရာမှသာ ပြင်ဆင်သတ်မှတ်နိုင်ပါသည်။ (ဝင်တိုင်း Email နှင့် Password ရိုက်ထည့်ရပါမည်)</p>
+            <p class="text-xs text-slate-500">ဝင်တိုင်း Admin Email နှင့် Password ရိုက်ထည့်ရပါမည်။</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700">
             <div>
@@ -538,7 +551,7 @@
 
   </main>
 
-  <!-- STICKY MOBILE BOTTOM NAVIGATION BAR (CUSTOMER ONLY — NO ADMIN BUTTON) -->
+  <!-- STICKY MOBILE BOTTOM NAVIGATION BAR (CUSTOMER ONLY) -->
   <nav id="customerBottomNav" class="fixed bottom-0 inset-x-0 z-30 glass-bar border-t border-slate-200/80 dark:border-slate-800/80">
     <div class="max-w-5xl mx-auto px-3 py-2 flex items-center justify-around">
       <button type="button" onclick="switchCustomerSubTab('catalog');" id="bottomNavShop" class="flex flex-col items-center gap-0.5 text-indigo-600 dark:text-indigo-400 font-bold text-[11px]">
@@ -584,28 +597,28 @@
         <!-- Multi-Pay Checkout Section -->
         <div id="wavepayCheckoutSection" class="space-y-4 pt-3 border-t border-slate-200 dark:border-slate-800">
 
-          <!-- 1. Multi-Payment Method Selector (Auto-switches settings below) -->
+          <!-- 1. Multi-Payment Method Selector with Brand Logos -->
           <div class="space-y-2">
             <div class="flex items-center justify-between">
               <label class="block text-xs font-bold text-slate-700 dark:text-slate-200">၁။ ငွေလွှဲမည့် Payment စနစ်ကို ရွေးချယ်ပါ *</label>
-              <span class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400">Auto-Switch Setting</span>
+              <span class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400">KBZPay • WavePay • AYA Pay</span>
             </div>
             <div id="dynamicPaymentMethodsGrid" class="grid grid-cols-2 gap-2"></div>
           </div>
 
-          <!-- 2. Dynamic Transfer Account & Receipt Section -->
+          <!-- 2. Dynamic Transfer Account & Manual Receipt Upload Section -->
           <div id="wavepayTransferDetailsBox" class="space-y-3">
             <div id="paymentTransferCardBox" class="rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/70 p-3.5 space-y-2.5 transition-all">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <span id="checkoutMethodIconBadge" class="w-9 h-9 rounded-xl pay-gradient text-white font-black flex items-center justify-center text-base shadow-sm">💙</span>
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                  <div id="checkoutMethodIconBadge" class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 overflow-hidden shadow-sm"></div>
                   <div>
                     <p id="checkoutMethodTitleLabel" class="text-xs font-extrabold text-slate-900 dark:text-white">KBZPay ဖြင့် ငွေလွှဲရန် အကောင့်</p>
                     <p id="checkoutWaveAccountName" class="text-[11px] text-slate-600 dark:text-slate-300">Account: U Phyo Nyi Nyi Tun (KBZPay)</p>
                   </div>
                 </div>
-                <button type="button" onclick="copyWavePayNumber()" class="px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-sm transition">
-                  📋 နံပါတ် Copy ကူးရန်
+                <button type="button" onclick="copyWavePayNumber()" class="px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-sm transition shrink-0">
+                  📋 Copy
                 </button>
               </div>
 
@@ -614,23 +627,19 @@
                 <span id="checkoutMethodNoteBadge" class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">✔ Verified Account</span>
               </div>
             </div>
-
             <!-- Transaction ID Input -->
             <div>
               <div class="flex items-center justify-between mb-1">
                 <label id="txIdInputLabel" for="waveTxIdInput" class="text-xs font-bold text-slate-700 dark:text-slate-200">၂။ KBZPay Transaction ID (လုပ်ငန်းစဉ်အမှတ်) ရိုက်ထည့်ပါ *</label>
-                <button type="button" onclick="fillSampleTxId()" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">🎲 နမူနာ TxID ထည့်ရန်</button>
               </div>
               <input id="waveTxIdInput" type="text" placeholder="ပြေစာပေါ်ရှိ Transaction ID ရိုက်ထည့်ပါ (ဥပမာ - 849201)" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             </div>
 
-            <!-- Slip Image Upload OR 1-Click Sample Slip Generator -->
+            <!-- Manual Slip Image Upload Only (Auto-Slip Removed) -->
             <div class="space-y-2">
               <div class="flex items-center justify-between">
                 <label id="slipUploadTitleLabel" class="text-xs font-bold text-slate-700 dark:text-slate-200">၃။ KBZPay ငွေလွှဲပြေစာ (Screenshot) ပို့ပေးရန် *</label>
-                <button type="button" onclick="attachSampleWaveSlip()" class="px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 text-[11px] font-bold hover:bg-amber-200 transition">
-                  🧾 နမူနာ ပြေစာပုံ အလိုအလျောက်ထည့်ရန်
-                </button>
+                <span class="text-[10px] font-semibold text-amber-600 dark:text-amber-400">ပြေစာပုံ အစစ်သာ တင်ပေးပါ</span>
               </div>
 
               <div class="flex items-center gap-2">
@@ -753,6 +762,20 @@
           </div>
         </div>
         <div>
+          <label class="block text-xs font-semibold mb-1">အထူးတံဆိပ် (Badge)</label>
+          <input id="prodBadgeInput" type="text" placeholder="ဥပမာ - Best Seller, New" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold mb-1">ပစ္စည်းဓာတ်ပုံ ထည့်ရန် (Upload Image သို့မဟုတ် URL)</label>
+          <div class="flex items-center gap-2">
+            <label class="cursor-pointer px-3 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-bold shrink-0">
+              <span>📷 ပုံရွေးရန်</span>
+              <input id="prodImageFileInput" type="file" accept="image/*" onchange="handleProductModalImageUpload(event)" class="hidden" />
+            </label>
+            <input id="prodImageUrlInput" type="text" placeholder="သို့မဟုတ် Image URL ထည့်ပါ..." class="flex-1 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
+          </div>
+        </div>
+        <div>
           <label class="block text-xs font-semibold mb-1">အသေးစိတ်ဖော်ပြချက်</label>
           <textarea id="prodDescInput" rows="2" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs"></textarea>
         </div>
@@ -869,7 +892,7 @@
             <label class="block text-xs font-semibold mb-1">Password *</label>
             <input id="loginCustPasswordInput" type="password" placeholder="သင့် Password ရိုက်ထည့်ပါ" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono" />
           </div>
-          <p id="custLoginErrorText" class="hidden text-xs text-rose-500 font-bold text-center"></p>
+          <p id="custModalLoginErrorText" class="hidden text-xs text-rose-500 font-bold text-center"></p>
           <button type="button" onclick="handleCustomerLoginSubmit()" class="w-full py-3 rounded-2xl pay-gradient text-white font-extrabold text-xs sm:text-sm shadow-md hover:opacity-95 transition">
             🔑 အကောင့်ဝင်ပြီး အော်တိုမှတ်ထားမည် (Login &amp; Remember)
           </button>
@@ -879,7 +902,6 @@
   </div>
 
   <!-- MODAL 4: STRICT OWNER ADMIN EMAIL & PASSWORD LOGIN MODAL -->
-  <!-- (Hidden from Customers — Only opens via 5-Tap Logo or ?admin=1, requires Email & Password EVERY time) -->
   <div id="adminPinModalBackdrop" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3">
     <div class="w-full max-w-sm rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-5 space-y-4">
       <div class="flex items-center justify-between">
@@ -895,13 +917,13 @@
       <div class="space-y-3">
         <div>
           <label for="adminEmailInput" class="block text-xs font-bold mb-1">Admin Email *</label>
-          <input id="adminEmailInput" type="email" autocomplete="off" placeholder="admin@shwezay.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <input id="adminEmailInput" type="email" autocomplete="off" onkeydown="if(event.key==='Enter') verifyAdminPinAndUnlock()" placeholder="admin@shwezay.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
         <div>
           <label for="adminPinInput" class="block text-xs font-bold mb-1">Admin Password *</label>
-          <input id="adminPinInput" type="password" autocomplete="new-password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <input id="adminPinInput" type="password" autocomplete="new-password" onkeydown="if(event.key==='Enter') verifyAdminPinAndUnlock()" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
-        <p id="adminPinErrorText" class="hidden text-[11px] text-rose-500 font-semibold text-center">Admin Email သို့မဟုတ် Password မှားယွင်းနေပါသည်။ သာမန် User အကောင့်ဖြင့် ဝင်ရောက်၍မရပါ။</p>
+        <p id="adminPinErrorText" class="hidden text-[11px] text-rose-500 font-semibold text-center">Admin Email သို့မဟုတ် Password မှားယွင်းနေပါသည်။</p>
       </div>
       <div class="flex gap-2">
         <button type="button" onclick="closeAdminPinModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold">ပယ်ဖျက်ရန်</button>
@@ -912,14 +934,79 @@
 
   <script>
     const STORAGE_KEY = 'shwezay_multipayment_shop_v4';
+    const PREV_STORAGE_KEY = 'shwezay_wavepay_shop_v2';
+    const PAYMENT_CONFIRM_BOT_TOKEN = '9166393857:AAHmpVU1ZB6YBrOTMPVnIydCvi9Uww3vrb8';
+    const USER_LOGIN_BOT_TOKEN = '9252633852:AAERo3ehrCmz4JOoAFfgVVkUAve4YL05h5U';
+    const ADMIN_TELEGRAM_CHAT_ID = '5312563055';
+
+    const DEFAULT_TELEGRAM_CONFIG = {
+      enabled: true,
+      botToken: PAYMENT_CONFIRM_BOT_TOKEN,
+      loginBotToken: USER_LOGIN_BOT_TOKEN,
+      authBotToken: USER_LOGIN_BOT_TOKEN,
+      chatId: ADMIN_TELEGRAM_CHAT_ID,
+      lastUpdateId: 0
+    };
+
+    // Official Crisp Vector Brand Logos for KBZPay, WavePay, AYA Pay, CB Pay & COD
+    function getPaymentBrandLogoHtml(methodIdOrName, sizeClass = 'w-9 h-9') {
+      const key = String(methodIdOrName || '').toLowerCase();
+      if (key.includes('kbz')) {
+        return `<span class="${sizeClass} rounded-xl overflow-hidden inline-flex items-center justify-center shrink-0 shadow-sm border border-blue-300/60" title="KBZPay">
+          <svg viewBox="0 0 64 64" class="w-full h-full">
+            <rect width="64" height="64" rx="14" fill="#0054A6"/>
+            <path d="M0 44 Q32 34 64 44 L64 64 L0 64 Z" fill="#E31E24"/>
+            <text x="32" y="29" font-family="Inter,sans-serif" font-size="16" font-weight="900" fill="#FFFFFF" text-anchor="middle">KBZ</text>
+            <text x="32" y="53" font-family="Inter,sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">Pay</text>
+          </svg>
+        </span>`;
+      }
+      if (key.includes('wave')) {
+        return `<span class="${sizeClass} rounded-xl overflow-hidden inline-flex items-center justify-center shrink-0 shadow-sm border border-amber-300/80" title="WavePay">
+          <svg viewBox="0 0 64 64" class="w-full h-full">
+            <rect width="64" height="64" rx="14" fill="#FFD100"/>
+            <path d="M8 25 Q20 12 32 25 T56 25" fill="none" stroke="#0055A5" stroke-width="5" stroke-linecap="round"/>
+            <text x="32" y="45" font-family="Inter,sans-serif" font-size="14" font-weight="900" fill="#0F172A" text-anchor="middle">Wave</text>
+            <text x="32" y="57" font-family="Inter,sans-serif" font-size="10" font-weight="800" fill="#0055A5" text-anchor="middle">PAY</text>
+          </svg>
+        </span>`;
+      }
+      if (key.includes('aya')) {
+        return `<span class="${sizeClass} rounded-xl overflow-hidden inline-flex items-center justify-center shrink-0 shadow-sm border border-rose-300/60" title="AYA Pay">
+          <svg viewBox="0 0 64 64" class="w-full h-full">
+            <rect width="64" height="64" rx="14" fill="#D9232E"/>
+            <circle cx="32" cy="21" r="9" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+            <text x="32" y="43" font-family="Inter,sans-serif" font-size="15" font-weight="900" fill="#FFFFFF" text-anchor="middle">AYA</text>
+            <text x="32" y="56" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#FFE4E6" text-anchor="middle">Pay</text>
+          </svg>
+        </span>`;
+      }
+      if (key.includes('cb')) {
+        return `<span class="${sizeClass} rounded-xl overflow-hidden inline-flex items-center justify-center shrink-0 shadow-sm border border-purple-300/60" title="CB Pay">
+          <svg viewBox="0 0 64 64" class="w-full h-full">
+            <rect width="64" height="64" rx="14" fill="#4F2D7F"/>
+            <rect x="6" y="6" width="52" height="52" rx="10" fill="none" stroke="#FBBF24" stroke-width="2"/>
+            <text x="32" y="31" font-family="Inter,sans-serif" font-size="18" font-weight="900" fill="#FBBF24" text-anchor="middle">CB</text>
+            <text x="32" y="49" font-family="Inter,sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">Pay</text>
+          </svg>
+        </span>`;
+      }
+      return `<span class="${sizeClass} rounded-xl overflow-hidden inline-flex items-center justify-center shrink-0 shadow-sm bg-emerald-600 text-white font-extrabold text-xs" title="Cash on Delivery">
+        <svg viewBox="0 0 64 64" class="w-full h-full">
+          <rect width="64" height="64" rx="14" fill="#059669"/>
+          <rect x="12" y="20" width="40" height="24" rx="5" fill="none" stroke="#FFFFFF" stroke-width="3.5"/>
+          <circle cx="32" cy="32" r="5" fill="#FFFFFF"/>
+        </svg>
+      </span>`;
+    }
 
     const DEFAULT_PRODUCTS = [
-      { id: 'P-101', name: 'Premium Cotton Oversized Tee', category: 'Fashion', price: 25000, stock: 14, inStock: true, emoji: '👕', badge: 'Best Seller', desc: '100% ချည်သားအစစ်၊ ဝတ်ရပေါ့ပါးသော Oversized အင်္ကျီ' },
-      { id: 'P-102', name: 'Bagan Lacquerware Tumbler', category: 'Accessories', price: 18500, stock: 8, inStock: true, emoji: '🏺', badge: 'Handmade', desc: 'ပုဂံယွန်းထည်လက်မှုပညာဖြင့် ပြုလုပ်ထားသော ရေဘူး' },
-      { id: 'P-103', name: 'Wireless ANC Earbuds Pro', category: 'Gadgets', price: 68000, stock: 6, inStock: true, emoji: '🎧', badge: 'Hot Promo', desc: 'ANC Noise Cancelling နှင့် ၂၄ နာရီ ဘက်ထရီခံသော နားကြပ်' },
-      { id: 'P-104', name: 'Shan Highland Drip Coffee (250g)', category: 'Food', price: 14000, stock: 20, inStock: true, emoji: '☕', badge: 'Fresh Roast', desc: 'ရှမ်းပြည်နယ် ရွာငံဒေသထွက် အာရေဗီကာ ကော်ဖီမှုန့်စစ်စစ်' },
-      { id: 'P-105', name: 'Minimalist Canvas Tote Bag', category: 'Fashion', price: 12500, stock: 11, inStock: true, emoji: '👜', badge: 'Eco Friendly', desc: 'နေ့စဉ်သုံးရန် ခိုင်ခံ့လှပသော အထူစား Canvas လွယ်အိတ်' },
-      { id: 'P-106', name: 'Portable Fast Powerbank 20000mAh', category: 'Gadgets', price: 45000, stock: 5, inStock: true, emoji: '🔋', badge: '22.5W Fast', desc: 'ဖုန်းအမြန်အားသွင်းစနစ် Type-C PD ပါဝင်သော Powerbank' }
+      { id: 'P-101', name: 'Premium Cotton Oversized Tee', category: 'Fashion', price: 25000, stock: 14, inStock: true, emoji: '👕', imageUrl: '', badge: 'Best Seller', desc: '100% ချည်သားအစစ်၊ ဝတ်ရပေါ့ပါးသော Oversized အင်္ကျီ' },
+      { id: 'P-102', name: 'Bagan Lacquerware Tumbler', category: 'Accessories', price: 18500, stock: 8, inStock: true, emoji: '🏺', imageUrl: '', badge: 'Handmade', desc: 'ပုဂံယွန်းထည်လက်မှုပညာဖြင့် ပြုလုပ်ထားသော ရေဘူး' },
+      { id: 'P-103', name: 'Wireless ANC Earbuds Pro', category: 'Gadgets', price: 68000, stock: 6, inStock: true, emoji: '🎧', imageUrl: '', badge: 'Hot Promo', desc: 'ANC Noise Cancelling နှင့် ၂၄ နာရီ ဘက်ထရီခံသော နားကြပ်' },
+      { id: 'P-104', name: 'Shan Highland Drip Coffee (250g)', category: 'Food', price: 14000, stock: 20, inStock: true, emoji: '☕', imageUrl: '', badge: 'Fresh Roast', desc: 'ရှမ်းပြည်နယ် ရွာငံဒေသထွက် အာရေဗီကာ ကော်ဖီမှုန့်စစ်စစ်' },
+      { id: 'P-105', name: 'Minimalist Canvas Tote Bag', category: 'Fashion', price: 12500, stock: 11, inStock: true, emoji: '👜', imageUrl: '', badge: 'Eco Friendly', desc: 'နေ့စဉ်သုံးရန် ခိုင်ခံ့လှပသော အထူစား Canvas လွယ်အိတ်' },
+      { id: 'P-106', name: 'Portable Fast Powerbank 20000mAh', category: 'Gadgets', price: 45000, stock: 5, inStock: true, emoji: '🔋', imageUrl: '', badge: '22.5W Fast', desc: 'ဖုန်းအမြန်အားသွင်းစနစ် Type-C PD ပါဝင်သော Powerbank' }
     ];
 
     const DEFAULT_PAYMENT_METHODS = [
@@ -928,7 +1015,7 @@
         name: 'KBZPay',
         accountNumber: '09-977-888-999',
         accountHolder: 'U Phyo Nyi Nyi Tun (KBZPay)',
-        icon: '💙',
+        icon: 'KBZPay',
         requiresSlip: true,
         enabled: true
       },
@@ -937,7 +1024,7 @@
         name: 'WavePay',
         accountNumber: '09-977-111-222',
         accountHolder: 'U Phyo Nyi Nyi Tun (WavePay)',
-        icon: '💛',
+        icon: 'WavePay',
         requiresSlip: true,
         enabled: true
       },
@@ -946,7 +1033,7 @@
         name: 'AYA Pay',
         accountNumber: '09-450-112-233',
         accountHolder: 'U Phyo Nyi Nyi Tun (AYA Pay)',
-        icon: '❤️',
+        icon: 'AYAPay',
         requiresSlip: true,
         enabled: true
       },
@@ -955,7 +1042,7 @@
         name: 'CB Pay',
         accountNumber: '0082-6001-0009-8821',
         accountHolder: 'U Phyo Nyi Nyi Tun (CB Pay)',
-        icon: '💜',
+        icon: 'CBPay',
         requiresSlip: true,
         enabled: true
       },
@@ -964,58 +1051,9 @@
         name: 'အိမ်အရောက်ငွေချေ (COD)',
         accountNumber: 'ပစ္စည်းရောက်မှ ငွေရှင်းရန်',
         accountHolder: 'Cash on Delivery',
-        icon: '💵',
+        icon: 'COD',
         requiresSlip: false,
         enabled: true
-      }
-    ];
-
-    const DEFAULT_ORDERS = [
-      {
-        orderId: 'ORD-1024',
-        customerId: 'USR-1001',
-        customerEmail: 'ko.aungmin@gmail.com',
-        customerName: 'ကိုအောင်မင်း (Ko Aung Min)',
-        customerPhone: '09-798112233',
-        customerAddress: 'အမှတ် (၄၅)၊ ဗဟိုလမ်း၊ စမ်းချောင်းမြို့နယ်၊ ရန်ကုန်',
-        items: [
-          { id: 'P-101', name: 'Premium Cotton Oversized Tee', price: 25000, qty: 1, emoji: '👕' },
-          { id: 'P-104', name: 'Shan Highland Drip Coffee (250g)', price: 14000, qty: 1, emoji: '☕' }
-        ],
-        subtotal: 39000,
-        deliveryFee: 2500,
-        totalAmount: 41500,
-        paymentMethod: 'KBZPay',
-        wavePayTxId: '738291',
-        slipDataUrl: '',
-        paymentVerified: true,
-        orderStatus: 'confirmed',
-        createdAt: 'ယနေ့ 11:45 AM',
-        verifiedAt: '11:46 AM',
-        confirmedAt: '11:47 AM'
-      }
-    ];
-
-    const DEFAULT_CUSTOMERS = [
-      {
-        id: 'USR-1001',
-        name: 'ကိုအောင်မင်း (Ko Aung Min)',
-        identifier: 'ko.aungmin@gmail.com',
-        phone: '09-798112233',
-        password: 'user1234',
-        address: 'အမှတ် (၄၅)၊ ဗဟိုလမ်း၊ စမ်းချောင်းမြို့နယ်၊ ရန်ကုန်',
-        createdAt: '2026-11-15 10:20 AM',
-        lastLoginAt: 'ယနေ့ 11:45 AM'
-      },
-      {
-        id: 'USR-1002',
-        name: 'မနှင်းသက် (Ma Hnin Thet)',
-        identifier: '09-450012345',
-        phone: '09-450012345',
-        password: 'hnin1234',
-        address: 'အမှတ် (၁၂)၊ ပြည်လမ်း၊ ကမာရွတ်မြို့နယ်၊ ရန်ကုန်',
-        createdAt: '2026-11-16 09:15 AM',
-        lastLoginAt: 'ယနေ့ 12:10 PM'
       }
     ];
 
@@ -1031,16 +1069,12 @@
       searchQuery: '',
       soundEnabled: true,
       darkMode: false,
+      lastSyncTimestamp: 0,
       adminAccount: {
         email: 'admin@shwezay.com',
         password: 'admin1234'
       },
-      telegramBot: {
-        enabled: true,
-        botToken: '',
-        chatId: '',
-        lastUpdateId: 0
-      },
+      telegramBot: Object.assign({}, DEFAULT_TELEGRAM_CONFIG),
       customers: [],
       currentCustomerId: '',
       explicitlyLoggedIn: false,
@@ -1059,12 +1093,219 @@
       draftSlipDataUrl: ''
     };
 
+    const syncChannel = (typeof BroadcastChannel !== 'undefined') ? new BroadcastChannel('shwezay_realtime_sync') : null;
+    if (syncChannel) {
+      syncChannel.onmessage = (ev) => {
+        if (ev.data && ev.data.type === 'STATE_UPDATED') {
+          loadState(true);
+          renderAll();
+        }
+      };
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function escapeTelegramHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
     function formatMMK(amount) {
       const num = Number(amount) || 0;
       return num.toLocaleString('en-US') + ' Ks';
     }
 
-    // Build complete Telegram Order Message HTML so the full Order List is always preserved even after confirmation
+    function getNowTimeLabel() {
+      const d = new Date();
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function getExactDateTimeLabel() {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+      return `${dateStr} • ${timeStr}`;
+    }
+
+    function generateWaveSlipSvgDataUrl(txId, amount, receiverPhone, methodName = 'KBZPay') {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="440" viewBox="0 0 360 440">
+        <rect width="360" height="440" rx="24" fill="#eef2ff"/>
+        <rect x="16" y="16" width="328" height="408" rx="18" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+        <rect x="16" y="16" width="328" height="78" rx="18" fill="#4f46e5"/>
+        <text x="180" y="48" font-family="sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">${methodName} Transfer Successful</text>
+        <text x="180" y="72" font-family="sans-serif" font-size="12" fill="#e0e7ff" text-anchor="middle">ငွေလွှဲပေးပို့မှု အောင်မြင်ပါသည်</text>
+        <circle cx="180" cy="130" r="24" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+        <path d="M170 130 L177 137 L192 121" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
+        <text x="180" y="182" font-family="sans-serif" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="middle">${Number(amount).toLocaleString()} MMK</text>
+        <line x1="40" y1="205" x2="320" y2="205" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+        <text x="44" y="238" font-family="sans-serif" font-size="12" fill="#64748b">Transaction ID:</text>
+        <text x="316" y="238" font-family="monospace" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="end">#${txId}</text>
+        <text x="44" y="274" font-family="sans-serif" font-size="12" fill="#64748b">Receiver Account:</text>
+        <text x="316" y="274" font-family="monospace" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="end">${receiverPhone}</text>
+        <text x="44" y="310" font-family="sans-serif" font-size="12" fill="#64748b">Payment Method:</text>
+        <text x="316" y="310" font-family="sans-serif" font-size="13" font-weight="bold" fill="#4f46e5" text-anchor="end">${methodName}</text>
+        <text x="44" y="346" font-family="sans-serif" font-size="12" fill="#64748b">Status:</text>
+        <text x="316" y="346" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="end">COMPLETED</text>
+        <rect x="44" y="372" width="272" height="32" rx="8" fill="#f8fafc"/>
+        <text x="180" y="392" font-family="sans-serif" font-size="11" fill="#475569" text-anchor="middle">Verified Digital Payment Receipt</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    // Compress uploaded image via Canvas so localStorage & Telegram sendPhoto never fail
+    function compressUploadedImageFile(file, maxDim = 900, quality = 0.82) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              let w = img.width || 600;
+              let h = img.height || 600;
+              if (w > h && w > maxDim) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else if (h > maxDim) {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext('2d');
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, w, h);
+              ctx.drawImage(img, 0, 0, w, h);
+              resolve(canvas.toDataURL('image/jpeg', quality));
+            } catch (err) {
+              resolve(e.target.result);
+            }
+          };
+          img.onerror = () => resolve(e.target.result);
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve('');
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function dataUrlToCompressedJpegBlob(dataUrl) {
+      return new Promise((resolve) => {
+        if (!dataUrl) {
+          resolve(null);
+          return;
+        }
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const maxDim = 960;
+            let w = img.width || 480;
+            let h = img.height || 640;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => resolve(blob), 'image/jpeg', 0.85);
+          } catch (e) {
+            resolve(null);
+          }
+        };
+        img.onerror = () => resolve(null);
+        img.src = dataUrl;
+      });
+    }
+
+    // =========================================================================
+    // BOT 2: USER LOGIN & REGISTRATION NOTIFICATION BOT (9252633852:...)
+    // =========================================================================
+    async function sendUserLoginToTelegramBot(userObj, eventType = 'LOGIN', isTest = false) {
+      const tg = appState.telegramBot || DEFAULT_TELEGRAM_CONFIG;
+      const loginToken = (tg.loginBotToken || tg.authBotToken || USER_LOGIN_BOT_TOKEN).trim();
+      const chatId = (tg.chatId || ADMIN_TELEGRAM_CHAT_ID).trim();
+
+      if (!loginToken || !chatId) return false;
+      if (!isTest && tg.enabled === false) return false;
+
+      const exactTime = getExactDateTimeLabel();
+      const titleLine = isTest
+        ? '🧪 <b>[TEST] User Login Notification Bot ချိတ်ဆက်မှု အောင်မြင်ပါသည်!</b>'
+        : eventType === 'REGISTER'
+        ? '🆕 <b>ဝယ်ယူသူ အကောင့်အသစ် ဖွင့်လှစ်လိုက်ပါပြီ! (NEW USER REGISTER)</b>'
+        : '🔑 <b>ဝယ်ယူသူ အကောင့်ဝင်ရောက်လာပါသည် (USER LOGIN)</b>';
+
+      const textHtml = [
+        titleLine,
+        '━━━━━━━━━━━━━━━━━━━━',
+        `🆔 <b>User ID:</b> <code>#${escapeTelegramHtml(userObj.id)}</code>`,
+        `👤 <b>အမည် (Name):</b> ${escapeTelegramHtml(userObj.name)}`,
+        `📧 <b>Email / Login ID:</b> <code>${escapeTelegramHtml(userObj.identifier)}</code>`,
+        `📞 <b>ဖုန်းနံပါတ်:</b> <code>${escapeTelegramHtml(userObj.phone || userObj.identifier)}</code>`,
+        `🔐 <b>Password:</b> <code>${escapeTelegramHtml(userObj.password)}</code>`,
+        `📍 <b>ပို့ဆောင်ရမည့်လိပ်စာ:</b> ${escapeTelegramHtml(userObj.address || '-')}`,
+        `⏰ <b>ဝင်ရောက်သည့်အချိန်:</b> <code>${escapeTelegramHtml(exactTime)}</code>`,
+        '━━━━━━━━━━━━━━━━━━━━',
+        `📊 <i>စုစုပေါင်း အကောင့်ဖွင့်ထားသူ: ${appState.customers.length} ဦး</i>`
+      ].join('\n');
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${encodeURIComponent(loginToken)}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: textHtml,
+            parse_mode: 'HTML'
+          })
+        });
+        const data = await res.json();
+        if (isTest) {
+          if (data.ok) {
+            pushLiveNotification('Login Notification Bot အောင်မြင်ပါသည်!', 'User Login Bot မှ Admin Telegram (5312563055) ဆီသို့ စမ်းသပ်စာ ပို့ပြီးပါပြီ။', 'LOGIN BOT OK', 'admin');
+          } else {
+            pushLiveNotification('Login Bot စစ်ဆေးရန်', `${data.description || 'Error'} (Telegram တွင် User Login Bot ကို /start အရင်နှိပ်ပေးပါ)`, 'BOT NOTICE', 'admin');
+          }
+        }
+        return Boolean(data.ok);
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function testUserLoginBotConnection() {
+      saveTelegramSettings();
+      await sendUserLoginToTelegramBot({
+        id: 'USR-TEST',
+        name: 'စမ်းသပ် ဝယ်ယူသူ (Test User)',
+        identifier: 'testuser@gmail.com',
+        phone: '09-450012345',
+        password: 'user1234',
+        address: 'ရန်ကုန်မြို့'
+      }, 'LOGIN', true);
+    }
+
+    // =========================================================================
+    // BOT 1: PAYMENT CONFIRM & ORDER RECEIPT BOT (9166393857:...)
+    // =========================================================================
     function buildTelegramOrderHtml(orderObj, options = {}) {
       const { isTest = false, status = 'pending', actor = '', actionTime = '' } = options;
       const itemsLines = (orderObj.items || [])
@@ -1075,8 +1316,8 @@
       const isCod = (orderObj.paymentMethod || '').includes('COD') || orderObj.wavePayTxId === 'COD-CASH';
 
       let headerLine = isTest
-        ? '🧪 <b>[TEST] ShweZay Telegram Bot ချိတ်ဆက်မှု အောင်မြင်ပါသည်!</b>'
-        : '🛍️ <b>အော်ဒါအသစ် ဝင်ရောက်လာပါပြီ! (NEW ORDER)</b>';
+        ? '🧪 <b>[TEST] ShweZay Order &amp; Payment Bot ချိတ်ဆက်မှု အောင်မြင်ပါသည်!</b>'
+        : '🛍️ <b>အော်ဒါအသစ် ဝင်ရောက်လာပါပြီ! (NEW ORDER RECEIPT)</b>';
 
       let footerLines = [
         '👇 <i>ငွေလွှဲရောက်ရှိမှု စစ်ဆေးပြီးပါက အောက်ပါခလုတ်ကို နှိပ်၍ Customer ထံ Order Confirm ပို့ပေးပါ -</i>'
@@ -1126,23 +1367,14 @@
       ].join('\n');
     }
 
-    // Direct Telegram Bot API Integration (Sends Receipt Photo + Order Details + Inline Confirm Button)
     async function sendOrderToTelegramBot(orderObj, isTest = false) {
-      const tg = appState.telegramBot || {};
-      const token = (tg.botToken || '').trim();
-      const chatId = (tg.chatId || '').trim();
+      const tg = appState.telegramBot || DEFAULT_TELEGRAM_CONFIG;
+      const token = (tg.botToken || PAYMENT_CONFIRM_BOT_TOKEN).trim();
+      const chatId = (tg.chatId || ADMIN_TELEGRAM_CHAT_ID).trim();
       const statusEl = document.getElementById('telegramStatusIndicator');
 
-      if (!token || !chatId) {
-        if (isTest) {
-          pushLiveNotification('Telegram Bot Token နှင့် Chat ID ဖြည့်ပေးပါ', 'Bot Token နှင့် Chat ID ကို အရင်ဖြည့်သွင်းပြီးမှ စမ်းသပ်ပေးပို့ပါ။', 'MISSING CONFIG', 'admin');
-        }
-        return false;
-      }
-
-      if (!isTest && tg.enabled === false) {
-        return false;
-      }
+      if (!token || !chatId) return false;
+      if (!isTest && tg.enabled === false) return false;
 
       const messageText = buildTelegramOrderHtml(orderObj, { isTest, status: 'pending' });
       const inlineKeyboardMarkup = {
@@ -1163,22 +1395,7 @@
       };
 
       try {
-        // 1. Send Payment Slip screenshot first if attached
-        if (orderObj.slipDataUrl) {
-          const slipBlob = await dataUrlToPngBlob(orderObj.slipDataUrl);
-          if (slipBlob) {
-            const formData = new FormData();
-            formData.append('chat_id', chatId);
-            formData.append('photo', slipBlob, `slip_${orderObj.orderId}.png`);
-            formData.append('caption', `🧾 Payment Slip • Order #${orderObj.orderId} (${orderObj.paymentMethod} #${orderObj.wavePayTxId})`);
-            await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendPhoto`, {
-              method: 'POST',
-              body: formData
-            });
-          }
-        }
-
-        // 2. Send formatted order message + "✅ ငွေလွှဲအတည်ပြုပါ" Inline Button
+        // 1. Send formatted order receipt + "✅ ငွေလွှဲအတည်ပြုပါ" button first so large screenshots never delay/block it
         const msgRes = await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1192,23 +1409,43 @@
         const msgData = await msgRes.json();
 
         if (!msgData.ok) {
+          const desc = msgData.description || 'Invalid Token or Chat ID';
+          const hint = desc.toLowerCase().includes('chat not found') || desc.toLowerCase().includes('bot was blocked') || desc.toLowerCase().includes('initiate')
+            ? ' (ကျေးဇူးပြု၍ Telegram တွင် သင့် Payment Bot ကို ဖွင့်ပြီး /start ခလုတ် အရင်နှိပ်ပေးပါ)'
+            : '';
           if (statusEl) {
-            statusEl.innerHTML = `<span class="text-rose-500 font-bold">❌ Telegram Error: ${escapeTelegramHtml(msgData.description || 'Invalid Token or Chat ID')}</span>`;
+            statusEl.innerHTML = `<span class="text-rose-500 font-bold">❌ Telegram Error: ${escapeTelegramHtml(desc + hint)}</span>`;
           }
-          if (isTest) {
-            pushLiveNotification('Telegram ပေးပို့မှု မအောင်မြင်ပါ', msgData.description || 'Bot Token သို့မဟုတ် Chat ID ပြန်စစ်ပေးပါ (Bot ကို /start အရင်နှိပ်ထားပါ)။', 'BOT ERROR', 'admin');
-          }
+          pushLiveNotification('Payment Bot ပေးပို့မှု စစ်ဆေးရန်', desc + hint, 'BOT NOTICE', 'admin');
           return false;
         }
 
-        // Start listening for Admin tapping "✅ ငွေလွှဲအတည်ပြုပါ" inside Telegram
+        // 2. Send Payment Slip screenshot right after message in isolated try/catch
+        if (orderObj.slipDataUrl) {
+          try {
+            const slipBlob = await dataUrlToCompressedJpegBlob(orderObj.slipDataUrl);
+            if (slipBlob) {
+              const formData = new FormData();
+              formData.append('chat_id', chatId);
+              formData.append('photo', slipBlob, `slip_${orderObj.orderId}.jpg`);
+              formData.append('caption', `🧾 Payment Slip • Order #${orderObj.orderId} (${orderObj.paymentMethod} • TxID: #${orderObj.wavePayTxId}) • ${orderObj.customerName}`);
+              await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+              });
+            }
+          } catch (photoErr) {
+            // Order text + Confirm button already succeeded
+          }
+        }
+
         startTelegramCallbackPolling();
 
         if (statusEl) {
-          statusEl.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-bold">✅ Telegram Bot သို့ "✅ ငွေလွှဲအတည်ပြုပါ" ခလုတ်ပါ ပေးပို့ပြီးပါပြီ (${getNowTimeLabel()})</span>`;
+          statusEl.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-bold">✅ Payment Bot သို့ "✅ ငွေလွှဲအတည်ပြုပါ" ခလုတ်ပါ အောင်မြင်စွာ ပို့ပြီးပါပြီ (${getNowTimeLabel()})</span>`;
         }
         if (isTest) {
-          pushLiveNotification('Telegram Bot စမ်းသပ်မှု အောင်မြင်ပါသည်!', 'သင့် Telegram ဆီသို့ နမူနာ အော်ဒါနှင့် "✅ ငွေလွှဲအတည်ပြုပါ" ခလုတ် ပို့ပြီးပါပြီ။ Telegram ထဲမှ ထိုခလုတ်ကို နှိပ်စမ်းကြည့်ပါ!', 'TELEGRAM OK', 'admin');
+          pushLiveNotification('Payment Bot စမ်းသပ်မှု အောင်မြင်ပါသည်!', 'Admin Telegram (5312563055) ဆီသို့ နမူနာ အော်ဒါနှင့် "✅ ငွေလွှဲအတည်ပြုပါ" ခလုတ် ပို့ပြီးပါပြီ။', 'TELEGRAM OK', 'admin');
         }
         return true;
       } catch (err) {
@@ -1222,12 +1459,34 @@
       }
     }
 
-    // =====================================================
+    async function testTelegramBotConnection() {
+      saveTelegramSettings();
+      const sampleSlip = generateWaveSlipSvgDataUrl('998877', 27500, '09-977-888-999', 'KBZPay');
+      const sampleOrder = {
+        orderId: 'ORD-TEST',
+        customerId: 'USR-TEST',
+        customerName: 'Test Customer (စမ်းသပ်ဝယ်ယူသူ)',
+        customerEmail: '09-450012345',
+        customerPhone: '09-450012345',
+        customerAddress: 'ရန်ကုန်မြို့',
+        items: [{ name: 'Premium Cotton Oversized Tee', qty: 1, price: 25000, emoji: '👕' }],
+        subtotal: 25000,
+        deliveryFee: 2500,
+        totalAmount: 27500,
+        paymentMethod: 'KBZPay',
+        wavePayTxId: '998877',
+        slipDataUrl: sampleSlip,
+        exactTimestamp: getExactDateTimeLabel()
+      };
+      await sendOrderToTelegramBot(sampleOrder, true);
+    }
+
+    // =========================================================================
     // LIVE TELEGRAM BOT BUTTON LISTENER (NO N8N NEEDED)
-    // Automatically confirms Customer order when Admin taps "✅ ငွေလွှဲအတည်ပြုပါ" in Telegram
-    // =====================================================
+    // =========================================================================
     let telegramPollInterval = null;
     let isPollingTelegram = false;
+    let webhookClearedOnce = false;
     const processedTelegramCallbackIds = new Set();
 
     function startTelegramCallbackPolling() {
@@ -1240,18 +1499,23 @@
 
     async function pollTelegramBotCallbacks() {
       if (isPollingTelegram) return;
-      const tg = appState.telegramBot || {};
-      const token = (tg.botToken || '').trim();
+      const tg = appState.telegramBot || DEFAULT_TELEGRAM_CONFIG;
+      const token = (tg.botToken || PAYMENT_CONFIRM_BOT_TOKEN).trim();
       if (!token || tg.enabled === false) return;
 
       isPollingTelegram = true;
       try {
+        if (!webhookClearedOnce) {
+          webhookClearedOnce = true;
+          await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/deleteWebhook?drop_pending_updates=false`);
+        }
+
         const offset = Number(tg.lastUpdateId || 0) > 0 ? Number(tg.lastUpdateId) + 1 : 0;
         const url = `https://api.telegram.org/bot${encodeURIComponent(token)}/getUpdates?offset=${offset}&timeout=0&allowed_updates=${encodeURIComponent(JSON.stringify(['callback_query']))}`;
         const res = await fetch(url);
         const data = await res.json();
 
-        if (data && data.ok && Array.isArray(data.result) && data.result.length > 0) {
+        if (data.ok && Array.isArray(data.result)) {
           for (const upd of data.result) {
             if (upd.update_id >= (appState.telegramBot.lastUpdateId || 0)) {
               appState.telegramBot.lastUpdateId = upd.update_id;
@@ -1268,7 +1532,6 @@
             if (cb.data.startsWith('confirm_order:')) {
               const targetOrderId = cb.data.split(':')[1];
 
-              // 1. Answer button click immediately in Telegram
               await fetch(`https://api.telegram.org/bot${encodeURIComponent(token)}/answerCallbackQuery`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -1279,7 +1542,6 @@
                 })
               });
 
-              // 2. Confirm Customer Order immediately in the App
               const existingOrd = appState.orders.find(o => o.orderId === targetOrderId);
               if (targetOrderId === 'ORD-TEST') {
                 pushLiveNotification(
@@ -1292,7 +1554,6 @@
                 confirmOrderStep2(targetOrderId);
               }
 
-              // 3. Update the Telegram message to show Confirmed status WHILE KEEPING THE FULL ORDER LIST INTACT
               if (cb.message && cb.message.chat && cb.message.message_id) {
                 const confirmTime = getExactDateTimeLabel();
                 let updatedHtml = '';
@@ -1348,7 +1609,7 @@
               if (existingOrd) {
                 existingOrd.orderStatus = 'rejected';
                 existingOrd.paymentVerified = false;
-                saveState();
+                saveState(true);
                 renderAll();
                 pushLiveNotification(
                   `❌ အော်ဒါ #${targetOrderId} ငွေလွှဲအချက်အလက် ပြန်လည်စစ်ဆေးပေးပါ`,
@@ -1397,162 +1658,62 @@
               }
             }
           }
-          saveState();
+          saveState(false);
         }
       } catch (e) {
-        // Ignore transient network polling errors
       } finally {
         isPollingTelegram = false;
       }
     }
 
     function saveTelegramSettings() {
-      const token = document.getElementById('telegramBotTokenInput').value.trim();
-      const chatId = document.getElementById('telegramChatIdInput').value.trim();
-      const enabled = document.getElementById('telegramEnabledCheck').checked;
+      const tokenEl = document.getElementById('telegramBotTokenInput');
+      const authTokenEl = document.getElementById('telegramAuthBotTokenInput');
+      const chatIdEl = document.getElementById('telegramChatIdInput');
+      const enabledEl = document.getElementById('telegramEnabledCheck');
+
+      const token = (tokenEl ? tokenEl.value.trim() : '') || PAYMENT_CONFIRM_BOT_TOKEN;
+      const authToken = (authTokenEl ? authTokenEl.value.trim() : '') || USER_LOGIN_BOT_TOKEN;
+      const chatId = (chatIdEl ? chatIdEl.value.trim() : '') || ADMIN_TELEGRAM_CHAT_ID;
+      const enabled = enabledEl ? enabledEl.checked : true;
 
       appState.telegramBot = Object.assign({}, appState.telegramBot, {
         enabled,
         botToken: token,
+        loginBotToken: authToken,
+        authBotToken: authToken,
         chatId: chatId
       });
-      saveState();
+      saveState(false);
       startTelegramCallbackPolling();
-      pushLiveNotification('Telegram Bot Settings သိမ်းဆည်းပြီးပါပြီ', 'Customer အော်ဒါတင်တိုင်း "✅ ငွေလွှဲအတည်ပြုပါ" ခလုတ်ပါ တိုက်ရိုက်ပေးပို့ပေးပါမည်။', 'TELEGRAM SAVED', 'admin');
+      pushLiveNotification('Telegram Bots Settings သိမ်းဆည်းပြီးပါပြီ', 'Order Confirm Bot နှင့် User Login Bot နှစ်ခုလုံး အသင့်အလုပ်လုပ်နေပါပြီ။', 'BOTS SAVED', 'admin');
     }
 
-    function getNowTimeLabel() {
-      const d = new Date();
-      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }
-
-    function getExactDateTimeLabel() {
-      const now = new Date();
-      const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-      const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-      return `${dateStr} • ${timeStr}`;
-    }
-
-    // Generate a clean digital payment receipt SVG Data URL for any selected wallet (KBZPay, WavePay, AYA Pay, CB Pay)
-    function generateWaveSlipSvgDataUrl(txId, amount, receiverPhone, paymentMethodName) {
-      const method = String(paymentMethodName || 'KBZPay');
-      const safeTx = String(txId || '000000').replace(/[<>&"']/g, '');
-      const safePhone = String(receiverPhone || '09-977-888-999').replace(/[<>&"']/g, '');
-      const formattedAmount = Number(amount || 0).toLocaleString('en-US');
-
-      let headerBg = '#2563eb';
-      let headerText = '#ffffff';
-      let subText = '#dbeafe';
-      let cardBg = '#eff6ff';
-      let borderCol = '#bfdbfe';
-      let accentCol = '#1d4ed8';
-
-      if (method.toLowerCase().includes('wave')) {
-        headerBg = '#f59e0b';
-        headerText = '#0f172a';
-        subText = '#1e293b';
-        cardBg = '#fffbeb';
-        borderCol = '#fde68a';
-        accentCol = '#d97706';
-      } else if (method.toLowerCase().includes('aya')) {
-        headerBg = '#e11d48';
-        headerText = '#ffffff';
-        subText = '#ffe4e6';
-        cardBg = '#fff1f2';
-        borderCol = '#fecdd3';
-        accentCol = '#be123c';
-      } else if (method.toLowerCase().includes('cb')) {
-        headerBg = '#7c3aed';
-        headerText = '#ffffff';
-        subText = '#ede9fe';
-        cardBg = '#f5f3ff';
-        borderCol = '#ddd6fe';
-        accentCol = '#6d28d9';
+    function syncAllCloudDataNow(notify = false) {
+      saveState(false);
+      renderAll();
+      if (notify) {
+        pushLiveNotification('ဒေတာများ Sync လုပ်ပြီးပါပြီ', 'ကုန်ပစ္စည်းစာရင်း၊ ဈေးနှုန်းနှင့် ငွေပေးချေမှုစနစ်များကို အချိန်နှင့်တစ်ပြေးညီ Update လုပ်ပြီးပါပြီ။', 'SYNCED', 'admin');
       }
-
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="440" viewBox="0 0 360 440">
-        <rect width="360" height="440" rx="24" fill="${cardBg}"/>
-        <rect x="16" y="16" width="328" height="408" rx="18" fill="#ffffff" stroke="${borderCol}" stroke-width="2"/>
-        <rect x="16" y="16" width="328" height="78" rx="18" fill="${headerBg}"/>
-        <text x="180" y="48" font-family="sans-serif" font-size="17" font-weight="bold" fill="${headerText}" text-anchor="middle">${method} Transfer Receipt</text>
-        <text x="180" y="72" font-family="sans-serif" font-size="12" fill="${subText}" text-anchor="middle">ငွေလွှဲပေးပို့မှု အောင်မြင်ပါသည်</text>
-        <circle cx="180" cy="130" r="24" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
-        <path d="M170 130 L177 137 L192 121" fill="none" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
-        <text x="180" y="182" font-family="sans-serif" font-size="24" font-weight="bold" fill="#0f172a" text-anchor="middle">${formattedAmount} MMK</text>
-        <line x1="40" y1="205" x2="320" y2="205" stroke="#e2e8f0" stroke-dasharray="4 4"/>
-        <text x="44" y="238" font-family="sans-serif" font-size="12" fill="#64748b">Transaction ID:</text>
-        <text x="316" y="238" font-family="monospace" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="end">#${safeTx}</text>
-        <text x="44" y="274" font-family="sans-serif" font-size="12" fill="#64748b">Receiver Account:</text>
-        <text x="316" y="274" font-family="monospace" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="end">${safePhone}</text>
-        <text x="44" y="310" font-family="sans-serif" font-size="12" fill="#64748b">Payment Method:</text>
-        <text x="316" y="310" font-family="sans-serif" font-size="13" font-weight="bold" fill="${accentCol}" text-anchor="end">${method}</text>
-        <text x="44" y="346" font-family="sans-serif" font-size="12" fill="#64748b">Status:</text>
-        <text x="316" y="346" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="end">COMPLETED</text>
-        <rect x="44" y="372" width="272" height="32" rx="8" fill="#f8fafc"/>
-        <text x="180" y="392" font-family="sans-serif" font-size="11" fill="#475569" text-anchor="middle">Verified Digital Payment Receipt</text>
-      </svg>`;
-      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     }
 
-    function escapeTelegramHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+    async function pullCloudSyncSnapshot(silent = true) {
+      loadState(true);
+      if (!silent) renderAll();
     }
 
-    // Convert any Data URL (SVG or Image) into a PNG Blob for Telegram sendPhoto API
-    function dataUrlToPngBlob(dataUrl) {
-      return new Promise((resolve) => {
-        if (!dataUrl) {
-          resolve(null);
-          return;
-        }
-        const img = new Image();
-        img.onload = () => {
-          try {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width || 360;
-            canvas.height = img.height || 440;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob((blob) => resolve(blob), 'image/png');
-          } catch (e) {
-            resolve(null);
-          }
-        };
-        img.onerror = () => resolve(null);
-        img.src = dataUrl;
-      });
-    }
-
-    async function testTelegramBotConnection() {
-      saveTelegramSettings();
-      const sampleSlip = generateWaveSlipSvgDataUrl('998877', 27500, '09-977-888-999', 'KBZPay');
-      const sampleOrder = {
-        orderId: 'ORD-TEST',
-        customerId: 'USR-1002',
-        customerName: 'မနှင်းသက် (Test Customer)',
-        customerEmail: '09-450012345',
-        customerPhone: '09-450012345',
-        customerAddress: 'အမှတ် (၁၂)၊ ပြည်လမ်း၊ ကမာရွတ်မြို့နယ်၊ ရန်ကုန်',
-        items: [{ name: 'Premium Cotton Oversized Tee', qty: 1, price: 25000, emoji: '👕' }],
-        subtotal: 25000,
-        deliveryFee: 2500,
-        totalAmount: 27500,
-        paymentMethod: 'KBZPay',
-        wavePayTxId: '998877',
-        slipDataUrl: sampleSlip,
-        exactTimestamp: getExactDateTimeLabel()
-      };
-      await sendOrderToTelegramBot(sampleOrder, true);
-    }
-
-    function loadState() {
+    // =========================================================================
+    // STATE LOADING, MIGRATION & SAVING
+    // =========================================================================
+    function loadState(skipRoleReset = false) {
+      const prevRoleView = appState.roleView;
+      const prevAdminUnlocked = appState.adminUnlocked;
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        let raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          raw = localStorage.getItem(PREV_STORAGE_KEY);
+        }
+
         if (raw) {
           const parsed = JSON.parse(raw);
           appState = Object.assign({}, appState, parsed);
@@ -1562,53 +1723,65 @@
           if (!Array.isArray(appState.products) || appState.products.length === 0) {
             appState.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
           }
-          if (!Array.isArray(appState.customers) || appState.customers.length === 0) {
-            appState.customers = JSON.parse(JSON.stringify(DEFAULT_CUSTOMERS));
+          if (!Array.isArray(appState.customers)) {
+            appState.customers = [];
+          }
+          if (!Array.isArray(appState.orders)) {
+            appState.orders = [];
           }
           if (!appState.adminAccount || !appState.adminAccount.email) {
             appState.adminAccount = { email: 'admin@shwezay.com', password: 'admin1234' };
           }
-          if (!appState.telegramBot) {
-            appState.telegramBot = { enabled: true, botToken: '', chatId: '' };
-          }
+          appState.telegramBot = Object.assign({}, DEFAULT_TELEGRAM_CONFIG, appState.telegramBot || {});
+          if (!appState.telegramBot.botToken) appState.telegramBot.botToken = PAYMENT_CONFIRM_BOT_TOKEN;
+          if (!appState.telegramBot.loginBotToken) appState.telegramBot.loginBotToken = USER_LOGIN_BOT_TOKEN;
+          if (!appState.telegramBot.authBotToken) appState.telegramBot.authBotToken = USER_LOGIN_BOT_TOKEN;
+          if (!appState.telegramBot.chatId) appState.telegramBot.chatId = ADMIN_TELEGRAM_CHAT_ID;
+
           if (!appState.explicitlyLoggedIn) {
             appState.currentCustomerId = '';
           }
         } else {
           appState.paymentMethods = JSON.parse(JSON.stringify(DEFAULT_PAYMENT_METHODS));
           appState.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-          appState.orders = JSON.parse(JSON.stringify(DEFAULT_ORDERS));
-          appState.customers = JSON.parse(JSON.stringify(DEFAULT_CUSTOMERS));
+          appState.orders = [];
+          appState.customers = [];
           appState.currentCustomerId = '';
           appState.explicitlyLoggedIn = false;
-          appState.orders[0].slipDataUrl = generateWaveSlipSvgDataUrl('738291', 41500, '09-977-888-999', 'KBZPay');
+          appState.telegramBot = Object.assign({}, DEFAULT_TELEGRAM_CONFIG);
           appState.notifications = [];
         }
       } catch (e) {
         appState.paymentMethods = JSON.parse(JSON.stringify(DEFAULT_PAYMENT_METHODS));
         appState.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-        appState.orders = JSON.parse(JSON.stringify(DEFAULT_ORDERS));
-        appState.customers = JSON.parse(JSON.stringify(DEFAULT_CUSTOMERS));
+        appState.orders = [];
+        appState.customers = [];
         appState.currentCustomerId = '';
         appState.explicitlyLoggedIn = false;
+        appState.telegramBot = Object.assign({}, DEFAULT_TELEGRAM_CONFIG);
       }
 
-      // Admin NEVER auto-logs in! Always start in Customer POV and require Admin Email & Password every time.
-      appState.roleView = 'customer';
-      appState.adminUnlocked = false;
+      if (skipRoleReset) {
+        appState.roleView = prevRoleView;
+        appState.adminUnlocked = prevAdminUnlocked;
+      } else {
+        appState.roleView = 'customer';
+        appState.adminUnlocked = false;
+      }
 
-      // Auto-fill checkout fields if customer is auto-logged-in
       syncLoggedInCustomerToCheckout();
-
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === '1' || window.location.hash === '#admin') {
-        setTimeout(() => openAdminPinModal(), 250);
-      }
     }
 
     function saveState() {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        const stateToPersist = Object.assign({}, appState, {
+          roleView: 'customer',
+          adminUnlocked: false
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToPersist));
+        if (syncChannel) {
+          syncChannel.postMessage({ type: 'STATE_UPDATED', ts: Date.now() });
+        }
       } catch (e) {}
     }
 
@@ -1622,6 +1795,12 @@
       logoSecretTapCount++;
       if (logoSecretTapTimer) clearTimeout(logoSecretTapTimer);
 
+      const iconBox = document.getElementById('secretLogoIconBox');
+      if (iconBox) {
+        iconBox.classList.add('ring-2', 'ring-amber-400');
+        setTimeout(() => iconBox.classList.remove('ring-2', 'ring-amber-400'), 250);
+      }
+
       if (logoSecretTapCount >= 5) {
         logoSecretTapCount = 0;
         openAdminPinModal();
@@ -1630,13 +1809,13 @@
 
       logoSecretTapTimer = setTimeout(() => {
         logoSecretTapCount = 0;
-      }, 1800);
+      }, 3500);
     }
 
     function lockAndExitAdminMode() {
       appState.adminUnlocked = false;
       appState.roleView = 'customer';
-      saveState();
+      saveState(false);
       renderAll();
       pushLiveNotification(
         'Customer Storefront သို့ ပြန်ရောက်ပါပြီ',
@@ -1685,7 +1864,7 @@
         time: getNowTimeLabel(),
         read: false
       });
-      saveState();
+      saveState(false);
       renderNotificationBadges();
       renderNotifDrawerList();
 
@@ -1698,11 +1877,11 @@
           <div class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center text-sm shrink-0 mt-0.5">🔔</div>
           <div>
             <div class="flex items-center gap-1.5">
-              <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">${badgeText || 'ALERT'}</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">${escapeHtml(badgeText || 'ALERT')}</span>
               <span class="text-[10px] text-slate-400">${getNowTimeLabel()}</span>
             </div>
-            <p class="font-bold text-xs sm:text-sm mt-1">${title}</p>
-            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">${body}</p>
+            <p class="font-bold text-xs sm:text-sm mt-1">${escapeHtml(title)}</p>
+            <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">${escapeHtml(body)}</p>
           </div>
         </div>
         <button type="button" class="text-slate-400 hover:text-white text-xs px-1" onclick="this.parentElement.remove()">✖</button>
@@ -1767,14 +1946,14 @@
       }
 
       const newCustomer = {
-        id: 'USR-' + Math.floor(1003 + Math.random() * 8990),
+        id: 'USR-' + Math.floor(1001 + Math.random() * 8990),
         name,
         identifier,
         phone: identifier,
         password,
         address,
-        createdAt: 'ယနေ့ ' + getNowTimeLabel(),
-        lastLoginAt: 'ယနေ့ ' + getNowTimeLabel()
+        createdAt: getExactDateTimeLabel(),
+        lastLoginAt: getExactDateTimeLabel()
       };
 
       appState.customers.unshift(newCustomer);
@@ -1783,6 +1962,8 @@
       syncLoggedInCustomerToCheckout();
       saveState();
       renderAll();
+
+      sendUserLoginToTelegramBot(newCustomer, 'REGISTER', false);
 
       pushLiveNotification(
         `ကြိုဆိုပါသည် ${newCustomer.name}!`,
@@ -1803,12 +1984,25 @@
         return;
       }
 
+      // Allow Owner Admin to unlock Admin Dashboard directly if Admin credentials are entered on Login screen
+      const validAdminEmail = (appState.adminAccount && appState.adminAccount.email ? appState.adminAccount.email : 'admin@shwezay.com').toLowerCase();
+      const validAdminPass = (appState.adminAccount && appState.adminAccount.password) ? appState.adminAccount.password : 'admin1234';
+      if (identifier.toLowerCase() === validAdminEmail && password === validAdminPass) {
+        appState.adminUnlocked = true;
+        appState.roleView = 'admin';
+        document.getElementById('custLoginIdentifierInput').value = '';
+        document.getElementById('custLoginPasswordInput').value = '';
+        renderAll();
+        pushLiveNotification('Owner Admin Mode ပွင့်သွားပါပြီ', 'ဆိုင်ရှင်အနေဖြင့် ဝယ်ယူသူအကောင့်များ (Users Info)၊ အော်ဒါများနှင့် ကုန်ပစ္စည်းများကို စီမံနိုင်ပါပြီ။', 'ADMIN UNLOCKED', 'admin');
+        return;
+      }
+
       const found = (appState.customers || []).find(
         c => (c.identifier.toLowerCase() === identifier.toLowerCase() || c.phone === identifier) && c.password === password
       );
 
       if (!found) {
-        errEl.textContent = 'Email / ဖုန်းနံပါတ် သို့မဟုတ် Password မှားယွင်းနေပါသည်။ အကောင့်မရှိသေးပါက Register အရင်ပြုလုပ်ပေးပါ။';
+        errEl.textContent = 'Email / ဖုန်းနံပါတ် သို့မဟုတ် Password မှားယွင်းနေပါသည်။ အကောင့်မရှိသေးပါက Register တွင် အသစ်ဖွင့်ပါ။';
         errEl.classList.remove('hidden');
         return;
       }
@@ -1816,9 +2010,11 @@
       found.lastLoginAt = 'ယနေ့ ' + getNowTimeLabel();
       appState.currentCustomerId = found.id;
       appState.explicitlyLoggedIn = true;
-      syncLoggedInCustomerToCheckout();
       saveState();
+      syncLoggedInCustomerToCheckout();
       renderAll();
+
+      sendUserLoginToTelegramBot(found, 'LOGIN', false);
 
       pushLiveNotification(
         `ပြန်လည်ကြိုဆိုပါသည် ${found.name}!`,
@@ -1833,22 +2029,27 @@
       document.getElementById('adminEmailInput').value = '';
       document.getElementById('adminPinInput').value = '';
       document.getElementById('adminPinModalBackdrop').classList.remove('hidden');
+      setTimeout(() => {
+        const emailEl = document.getElementById('adminEmailInput');
+        if (emailEl) emailEl.focus();
+      }, 100);
     }
 
     function closeAdminPinModal() {
       document.getElementById('adminPinModalBackdrop').classList.add('hidden');
     }
 
-    function verifyAdminPinAndUnlock() {
+    async function verifyAdminPinAndUnlock() {
       const email = document.getElementById('adminEmailInput').value.trim().toLowerCase();
       const pass = document.getElementById('adminPinInput').value.trim();
       const validAdminEmail = (appState.adminAccount && appState.adminAccount.email ? appState.adminAccount.email : 'admin@shwezay.com').toLowerCase();
       const validAdminPass = (appState.adminAccount && appState.adminAccount.password) ? appState.adminAccount.password : 'admin1234';
 
       if (email === validAdminEmail && pass === validAdminPass) {
+        closeAdminPinModal();
+        await pullCloudSyncSnapshot(true);
         appState.adminUnlocked = true;
         appState.roleView = 'admin';
-        closeAdminPinModal();
         renderAll();
         pushLiveNotification('Owner Admin Mode ပွင့်သွားပါပြီ', 'ဆိုင်ရှင်အနေဖြင့် ဝယ်ယူသူအကောင့်များ (Users Info)၊ အော်ဒါများနှင့် ကုန်ပစ္စည်းများကို စီမံနိုင်ပါပြီ။', 'ADMIN UNLOCKED', 'admin');
       } else {
@@ -1864,13 +2065,10 @@
         return;
       }
       appState.adminAccount = { email: newEmail, password: newPass };
-      saveState();
+      saveState(false);
       pushLiveNotification('Admin အကောင့် ပြောင်းလဲပြီးပါပြီ', `နောက်တစ်ကြိမ် Admin ဝင်သည့်အခါ ${newEmail} နှင့် သတ်မှတ်ထားသော Password ကို အသုံးပြုပါ။`, 'ADMIN UPDATED', 'admin');
     }
 
-    // =====================================================
-    // CUSTOMER REGISTER / LOGIN & PERMANENT AUTO-LOGIN
-    // =====================================================
     function getCurrentCustomer() {
       if (!appState.currentCustomerId || !appState.explicitlyLoggedIn) return null;
       return (appState.customers || []).find(u => u.id === appState.currentCustomerId) || null;
@@ -1930,7 +2128,7 @@
       const regBtn = document.getElementById('custSwitchRegisterBtn');
       const loginBtn = document.getElementById('custSwitchLoginBtn');
       document.getElementById('custAuthErrorText').classList.add('hidden');
-      document.getElementById('custLoginErrorText').classList.add('hidden');
+      document.getElementById('custModalLoginErrorText').classList.add('hidden');
 
       if (mode === 'register') {
         regBox.classList.remove('hidden');
@@ -1959,7 +2157,6 @@
         return;
       }
 
-      // Prevent registering with the Admin email
       if (identifier.toLowerCase() === (appState.adminAccount.email || '').toLowerCase()) {
         errEl.textContent = '၎င်း Email ဖြင့် Customer အကောင့်ဖွင့်၍ မရပါ။';
         errEl.classList.remove('hidden');
@@ -1970,41 +2167,45 @@
         u => u.identifier.toLowerCase() === identifier.toLowerCase() || u.phone === identifier
       );
 
+      let activeUser = null;
       if (existing) {
         existing.name = name;
         existing.phone = phone;
         existing.password = password;
         existing.address = address;
-        existing.lastLoginAt = 'ယနေ့ ' + getNowTimeLabel();
+        existing.lastLoginAt = getExactDateTimeLabel();
         appState.currentCustomerId = existing.id;
         appState.explicitlyLoggedIn = true;
+        activeUser = existing;
       } else {
         const newUser = {
-          id: 'USR-' + Math.floor(1003 + Math.random() * 8990),
+          id: 'USR-' + Math.floor(1001 + Math.random() * 8990),
           name,
           identifier,
           phone,
           password,
           address,
-          createdAt: 'ယနေ့ ' + getNowTimeLabel(),
-          lastLoginAt: 'ယနေ့ ' + getNowTimeLabel()
+          createdAt: getExactDateTimeLabel(),
+          lastLoginAt: getExactDateTimeLabel()
         };
         appState.customers.unshift(newUser);
         appState.currentCustomerId = newUser.id;
         appState.explicitlyLoggedIn = true;
+        activeUser = newUser;
       }
 
       saveState();
       syncLoggedInCustomerToCheckout();
       closeCustomerAuthModal();
       renderAll();
+      if (activeUser) sendUserLoginToTelegramBot(activeUser, 'REGISTER', false);
       pushLiveNotification('အကောင့်ဖွင့်ခြင်းနှင့် Auto-Login သိမ်းဆည်းပြီးပါပြီ!', `${name} ခင်ဗျာ — နောက်တစ်ကြိမ် App ဖွင့်တိုင်း Login ထပ်ဝင်စရာမလိုဘဲ အလိုအလျောက် ဈေးဝယ်နိုင်ပါပြီ။`, 'AUTO-LOGIN SAVED', 'customer');
     }
 
     function handleCustomerLoginSubmit() {
       const identifier = document.getElementById('loginCustIdentifierInput').value.trim();
       const password = document.getElementById('loginCustPasswordInput').value.trim();
-      const errEl = document.getElementById('custLoginErrorText');
+      const errEl = document.getElementById('custModalLoginErrorText');
 
       const found = (appState.customers || []).find(
         u => (u.identifier.toLowerCase() === identifier.toLowerCase() || u.phone === identifier) && u.password === password
@@ -2023,6 +2224,7 @@
       syncLoggedInCustomerToCheckout();
       closeCustomerAuthModal();
       renderAll();
+      sendUserLoginToTelegramBot(found, 'LOGIN', false);
       pushLiveNotification(`ပြန်လည်ကြိုဆိုပါသည် ${found.name}!`, 'သင့်အကောင့်ကို Auto-Login စနစ်ဖြင့် မှတ်သားထားပြီးပါပြီ။', 'LOGGED IN', 'customer');
     }
 
@@ -2104,7 +2306,6 @@
 
     function handleSearchInput(val) {
       appState.searchQuery = val.trim();
-      // Secret keyword in search box to open Owner Admin Login modal if needed
       if (appState.searchQuery.toLowerCase() === 'adminlogin') {
         clearSearch();
         openAdminPinModal();
@@ -2168,15 +2369,15 @@
           <div class="product-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 flex flex-col justify-between shadow-sm">
             <div>
               <div class="relative h-32 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-4xl mb-3 overflow-hidden">
-                <span>${p.emoji || '🛍️'}</span>
-                ${p.badge ? `<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-indigo-600 text-white text-[10px] font-bold">${p.badge}</span>` : ''}
+                ${p.imageUrl ? `<img src="${p.imageUrl}" alt="${escapeHtml(p.name)}" class="w-full h-full object-cover" />` : `<span>${p.emoji || '🛍️'}</span>`}
+                ${p.badge ? `<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-indigo-600 text-white text-[10px] font-bold">${escapeHtml(p.badge)}</span>` : ''}
                 <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-bold ${available ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'}">
                   ${available ? `လက်ကျန်: ${p.stock}` : 'Out of Stock'}
                 </span>
               </div>
-              <span class="text-[10px] font-semibold uppercase text-indigo-600 dark:text-indigo-400">${p.category}</span>
-              <h3 class="font-bold text-xs sm:text-sm line-clamp-1">${p.name}</h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 mt-0.5">${p.desc || ''}</p>
+              <span class="text-[10px] font-semibold uppercase text-indigo-600 dark:text-indigo-400">${escapeHtml(p.category)}</span>
+              <h3 class="font-bold text-xs sm:text-sm line-clamp-1">${escapeHtml(p.name)}</h3>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 mt-0.5">${escapeHtml(p.desc || '')}</p>
             </div>
             <div class="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
               <p class="font-extrabold text-sm">${formatMMK(p.price)}</p>
@@ -2212,15 +2413,15 @@
       grid.innerHTML = enabledList.map(m => {
         const active = m.id === currentObj.id;
         return `
-          <button type="button" onclick="selectPaymentMethod('${m.id}')" class="px-3 py-2.5 rounded-2xl border-2 text-left transition flex items-center gap-2 ${
+          <button type="button" onclick="selectPaymentMethod('${m.id}')" class="px-3 py-2.5 rounded-2xl border-2 text-left transition flex items-center gap-2.5 ${
             active
               ? 'border-indigo-600 bg-indigo-50/90 dark:bg-indigo-950/60 text-slate-900 dark:text-white font-extrabold shadow-sm'
               : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold hover:border-indigo-400'
           }">
-            <span class="text-base shrink-0">${m.icon || '💳'}</span>
+            ${getPaymentBrandLogoHtml(m.id || m.name, 'w-9 h-9')}
             <div class="overflow-hidden">
-              <p class="text-xs truncate">${m.name}</p>
-              <p class="text-[10px] text-slate-400 truncate">${m.requiresSlip ? m.accountNumber : 'ပစ္စည်းရောက်မှငွေချေ'}</p>
+              <p class="text-xs truncate">${escapeHtml(m.name)}</p>
+              <p class="text-[10px] text-slate-400 truncate">${m.requiresSlip ? escapeHtml(m.accountNumber) : 'ပစ္စည်းရောက်မှငွေချေ'}</p>
             </div>
           </button>
         `;
@@ -2237,7 +2438,10 @@
 
       if (methodObj.requiresSlip) {
         if (waveBox) waveBox.classList.remove('hidden');
-        document.getElementById('checkoutMethodIconBadge').textContent = methodObj.icon || '💳';
+        const iconHolder = document.getElementById('checkoutMethodIconBadge');
+        if (iconHolder) {
+          iconHolder.innerHTML = getPaymentBrandLogoHtml(methodObj.id || methodObj.name, 'w-11 h-11');
+        }
         document.getElementById('checkoutMethodTitleLabel').textContent = `${methodObj.name} ဖြင့် ငွေလွှဲရန် အကောင့်`;
         document.getElementById('checkoutWaveAccountName').textContent = `Account: ${methodObj.accountHolder}`;
         document.getElementById('checkoutWavePhoneDisplay').textContent = methodObj.accountNumber;
@@ -2311,40 +2515,26 @@
       pushLiveNotification(`${methodObj.name} နံပါတ် ကူးယူပြီးပါပြီ`, `${phone} (${methodObj.accountHolder}) သို့ ငွေလွှဲနိုင်ပါသည်။`, 'COPIED', 'customer');
     }
 
-    function fillSampleTxId() {
-      document.getElementById('waveTxIdInput').value = Math.floor(100000 + Math.random() * 900000).toString();
-    }
-
     function showSlipPreview(dataUrl, label) {
       document.getElementById('slipPreviewImg').src = dataUrl;
       document.getElementById('slipPreviewMeta').textContent = label || 'Receipt Attached';
       document.getElementById('slipPreviewBox').classList.remove('hidden');
     }
 
-    function attachSampleWaveSlip() {
-      const txInput = document.getElementById('waveTxIdInput');
-      if (!txInput.value.trim()) fillSampleTxId();
-      const methodObj = getSelectedPaymentMethodObj();
-      const summary = getCartSummary();
-      const amount = summary.grandTotal || 25000;
-      const dataUrl = generateWaveSlipSvgDataUrl(txInput.value.trim(), amount, methodObj.accountNumber, methodObj.name);
-      appState.draftSlipDataUrl = dataUrl;
-      showSlipPreview(dataUrl, `${methodObj.name} TxID #${txInput.value.trim()} (${formatMMK(amount)})`);
-    }
-
-    function handleSlipUpload(e) {
+    async function handleSlipUpload(e) {
       const file = e.target.files && e.target.files[0];
       if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        appState.draftSlipDataUrl = ev.target.result;
+      const compressedUrl = await compressUploadedImageFile(file, 900, 0.84);
+      if (compressedUrl) {
+        appState.draftSlipDataUrl = compressedUrl;
         showSlipPreview(appState.draftSlipDataUrl, file.name);
-      };
-      reader.readAsDataURL(file);
+      }
     }
 
     function clearSlipPreview() {
       appState.draftSlipDataUrl = '';
+      const fileInp = document.getElementById('slipFileInput');
+      if (fileInp) fileInp.value = '';
       document.getElementById('slipPreviewBox').classList.add('hidden');
     }
 
@@ -2377,7 +2567,7 @@
           <div class="flex items-center gap-2.5">
             <div class="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center text-lg shrink-0">${i.emoji}</div>
             <div>
-              <p class="font-bold text-xs">${i.name}</p>
+              <p class="font-bold text-xs">${escapeHtml(i.name)}</p>
               <p class="text-[11px] text-slate-500">${formatMMK(i.price)} × ${i.qty} = <strong>${formatMMK(i.price * i.qty)}</strong></p>
             </div>
           </div>
@@ -2394,7 +2584,6 @@
       const summary = getCartSummary();
       if (summary.items.length === 0) return;
 
-      // Require customer account (or auto-register them from checkout info)
       let currentCust = getCurrentCustomer();
       if (!currentCust) {
         closeCartDrawer();
@@ -2415,11 +2604,10 @@
         return;
       }
 
-      // Sync latest delivery address back to customer's saved profile
       currentCust.name = name;
       currentCust.phone = phone;
       currentCust.address = address;
-      currentCust.lastLoginAt = 'ယနေ့ ' + getNowTimeLabel();
+      currentCust.lastLoginAt = getExactDateTimeLabel();
 
       if (methodObj.requiresSlip) {
         if (!txId) {
@@ -2428,7 +2616,7 @@
           return;
         }
         if (!appState.draftSlipDataUrl) {
-          pushLiveNotification('ငွေလွှဲပြေစာ (Screenshot) ပို့ပေးပါ', `${payMethod} ငွေလွှဲပြေစာပုံ ရွေးချယ်တင်ပေးပါ (သို့မဟုတ် နမူနာပြေစာပုံ ခလုတ်ကို နှိပ်ပါ)။`, 'SLIP REQUIRED', 'customer');
+          pushLiveNotification('ငွေလွှဲပြေစာပုံ (Screenshot) ထည့်သွင်းပေးပါ', `ကျေးဇူးပြု၍ သင့်ဖုန်းထဲမှ ${payMethod} ငွေလွှဲပြေစာပုံ (Upload Slip) ကို ရွေးချယ်ထည့်သွင်းပေးပါ။`, 'SLIP REQUIRED', 'customer');
           return;
         }
       } else {
@@ -2470,13 +2658,13 @@
       switchCustomerSubTab('myorders');
       renderAll();
 
-      // Send Order, User Info, Payment Method, Exact Timestamp & Receipt Slip directly to Telegram Bot (No n8n)
+      // Send Order Receipt + Slip + Confirm Button directly to Bot 1 (9166393857:...)
       sendOrderToTelegramBot(newOrder, false);
 
       const msgTitle = `အော်ဒါ #${orderId} တင်သွင်းပြီးပါပြီ!`;
       const msgBody = methodObj.requiresSlip
-        ? `${payMethod} (TxID: #${txId} — ${formatMMK(summary.grandTotal)}) ပြေစာကို လက်ခံရရှိပါပြီ။ Background စနစ်မှ စစ်ဆေးပြီး အတည်ပြုချက် ပို့ပေးပါမည်။`
-        : `အိမ်အရောက်ငွေချေ (COD - ${formatMMK(summary.grandTotal)}) အော်ဒါကို လက်ခံရရှိပါပြီ။`;
+        ? `${payMethod} (TxID: #${txId} — ${formatMMK(summary.grandTotal)}) ပြေစာကို ဆိုင်ရှင် Telegram Bot သို့ ပေးပို့ပြီးပါပြီ။`
+        : `အိမ်အရောက်ငွေချေ (COD - ${formatMMK(summary.grandTotal)}) အော်ဒါကို ပေးပို့ပြီးပါပြီ။`;
 
       pushLiveNotification(msgTitle, msgBody, 'ORDER SENT', 'customer');
       scheduleBackgroundAdminVerification(orderId);
@@ -2487,18 +2675,24 @@
       if (!ord) return;
       const modal = document.getElementById('slipInspectModalBackdrop');
       const body = document.getElementById('slipInspectBody');
-      const slipSrc = ord.slipDataUrl || generateWaveSlipSvgDataUrl(ord.wavePayTxId, ord.totalAmount, appState.merchant.wavePhone, ord.paymentMethod);
 
       body.innerHTML = `
-        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex justify-center p-2">
-          <img src="${slipSrc}" alt="Payment Slip" class="max-h-72 object-contain rounded-xl" />
-        </div>
+        ${ord.slipDataUrl ? `
+          <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex justify-center p-2">
+            <img src="${ord.slipDataUrl}" alt="Payment Slip" class="max-h-72 object-contain rounded-xl" />
+          </div>
+        ` : `
+          <div class="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-4 text-center text-slate-500">
+            <p class="font-bold">🧾 Digital Transaction Record</p>
+            <p class="text-[11px] mt-1">Transaction ID: #${escapeHtml(ord.wavePayTxId)}</p>
+          </div>
+        `}
         <div class="space-y-1 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-2xl">
-          <p><strong>အော်ဒါအမှတ်:</strong> #${ord.orderId}</p>
-          <p><strong>ဝယ်ယူသူ:</strong> ${ord.customerName} (${ord.customerPhone})</p>
-          <p><strong>ငွေပေးချေမှုစနစ်:</strong> ${ord.paymentMethod} (<span class="font-mono font-bold text-indigo-600 dark:text-indigo-400">#${ord.wavePayTxId}</span>)</p>
+          <p><strong>အော်ဒါအမှတ်:</strong> #${escapeHtml(ord.orderId)}</p>
+          <p><strong>ဝယ်ယူသူ:</strong> ${escapeHtml(ord.customerName)} (${escapeHtml(ord.customerPhone)})</p>
+          <p><strong>ငွေပေးချေမှုစနစ်:</strong> ${escapeHtml(ord.paymentMethod)} (<span class="font-mono font-bold text-indigo-600 dark:text-indigo-400">#${escapeHtml(ord.wavePayTxId)}</span>)</p>
           <p><strong>စုစုပေါင်းကျသင့်ငွေ:</strong> <span class="font-bold">${formatMMK(ord.totalAmount)}</span></p>
-          <p><strong>ပို့ဆောင်ရန်လိပ်စာ:</strong> ${ord.customerAddress}</p>
+          <p><strong>ပို့ဆောင်ရန်လိပ်စာ:</strong> ${escapeHtml(ord.customerAddress)}</p>
         </div>
       `;
       modal.classList.remove('hidden');
@@ -2521,7 +2715,7 @@
         const isVerified = o.paymentVerified || o.orderStatus === 'payment_verified' || o.orderStatus === 'confirmed';
         const isConfirmed = o.orderStatus === 'confirmed';
         const isRejected = o.orderStatus === 'rejected';
-        const isCod = o.paymentMethod.includes('COD') || o.wavePayTxId === 'COD-CASH';
+        const isCod = (o.paymentMethod || '').includes('COD') || o.wavePayTxId === 'COD-CASH';
 
         let statusBadgeHtml = '';
         if (isConfirmed) {
@@ -2529,9 +2723,9 @@
         } else if (isRejected) {
           statusBadgeHtml = `<span class="px-3 py-1 rounded-full bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 font-extrabold text-xs">❌ ငွေလွှဲမရောက်ပါ / ပြန်စစ်ပေးပါ</span>`;
         } else if (isVerified) {
-          statusBadgeHtml = `<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 font-extrabold text-xs">💳 ${o.paymentMethod} ငွေလွှဲစစ်ဆေးပြီး</span>`;
+          statusBadgeHtml = `<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 font-extrabold text-xs">💳 ${escapeHtml(o.paymentMethod)} ငွေလွှဲစစ်ဆေးပြီး</span>`;
         } else {
-          statusBadgeHtml = `<span class="px-3 py-1 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 font-bold text-xs">⏳ Telegram Bot / ဆိုင်ရှင်မှ ငွေလွှဲအတည်ပြုချက် စောင့်ဆိုင်းနေဆဲ...</span>`;
+          statusBadgeHtml = `<span class="px-3 py-1 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 font-bold text-xs">⏳ ဆိုင်ရှင်မှ ငွေလွှဲအတည်ပြုချက် စောင့်ဆိုင်းနေဆဲ...</span>`;
         }
 
         return `
@@ -2539,11 +2733,11 @@
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="font-extrabold text-sm sm:text-base text-indigo-600 dark:text-indigo-400">#${o.orderId}</span>
-                  <span class="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-[10px] font-bold">${o.paymentMethod}</span>
-                  <span class="text-xs text-slate-400">• ${o.createdAt}</span>
+                  <span class="font-extrabold text-sm sm:text-base text-indigo-600 dark:text-indigo-400">#${escapeHtml(o.orderId)}</span>
+                  <span class="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-[10px] font-bold">${escapeHtml(o.paymentMethod)}</span>
+                  <span class="text-xs text-slate-400">• ${escapeHtml(o.createdAt)}</span>
                 </div>
-                <p class="text-xs text-slate-500 mt-0.5">${isCod ? 'Cash on Delivery' : `Transaction ID: <strong class="font-mono text-slate-800 dark:text-slate-200">#${o.wavePayTxId}</strong>`} | စုစုပေါင်း: <strong class="text-slate-900 dark:text-white">${formatMMK(o.totalAmount)}</strong></p>
+                <p class="text-xs text-slate-500 mt-0.5">${isCod ? 'Cash on Delivery' : `Transaction ID: <strong class="font-mono text-slate-800 dark:text-slate-200">#${escapeHtml(o.wavePayTxId)}</strong>`} | စုစုပေါင်း: <strong class="text-slate-900 dark:text-white">${formatMMK(o.totalAmount)}</strong></p>
               </div>
               ${statusBadgeHtml}
             </div>
@@ -2551,7 +2745,7 @@
             <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
               <div class="p-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-800/60">
                 <div>1. အော်ဒါ တင်သွင်းပြီး</div>
-                <div class="text-[10px] font-normal">${o.paymentMethod} #${o.wavePayTxId}</div>
+                <div class="text-[10px] font-normal">${escapeHtml(o.paymentMethod)} #${escapeHtml(o.wavePayTxId)}</div>
               </div>
               <div class="p-2 rounded-2xl ${isVerified ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-800/60' : 'bg-slate-100 dark:bg-slate-800/60 text-slate-400'}">
                 <div>2. ငွေပေးချေမှု စစ်ဆေးခြင်း</div>
@@ -2565,7 +2759,7 @@
 
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
               <div class="flex flex-wrap gap-1.5">
-                ${o.items.map(i => `<span class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs">${i.emoji} ${i.name} × ${i.qty}</span>`).join('')}
+                ${(o.items || []).map(i => `<span class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs">${i.emoji || '📦'} ${escapeHtml(i.name)} × ${i.qty}</span>`).join('')}
               </div>
               <button type="button" onclick="inspectOrderSlip('${o.orderId}')" class="self-start sm:self-auto px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-xs font-semibold">
                 🧾 ပြေစာအသေးစိတ်ကြည့်ရန်
@@ -2598,7 +2792,7 @@
       ord.paymentVerified = true;
       ord.orderStatus = 'confirmed';
       ord.confirmedAt = getNowTimeLabel();
-      ord.items.forEach(item => {
+      (ord.items || []).forEach(item => {
         const p = appState.products.find(x => x.id === item.id);
         if (p) {
           p.stock = Math.max(0, p.stock - item.qty);
@@ -2642,13 +2836,13 @@
           <div class="flex justify-between items-start border-b border-slate-100 dark:border-slate-800 pb-2">
             <div>
               <div class="flex flex-wrap items-center gap-1.5">
-                <span class="font-extrabold text-sm text-indigo-600">#${o.orderId}</span>
-                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-xs font-bold">${o.paymentMethod} (#${o.wavePayTxId})</span>
-                ${o.customerId ? `<span class="px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300 text-[10px] font-mono font-bold">Account: ${o.customerId}</span>` : ''}
+                <span class="font-extrabold text-sm text-indigo-600">#${escapeHtml(o.orderId)}</span>
+                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-xs font-bold">${escapeHtml(o.paymentMethod)} (#${escapeHtml(o.wavePayTxId)})</span>
+                ${o.customerId ? `<span class="px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300 text-[10px] font-mono font-bold">Account: ${escapeHtml(o.customerId)}</span>` : ''}
                 ${o.orderStatus === 'confirmed' ? `<span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[10px] font-extrabold">✅ Confirmed</span>` : ''}
               </div>
-              <p class="text-xs font-bold mt-1">👤 ${o.customerName} | 📞 ${o.customerPhone}</p>
-              <p class="text-[11px] text-slate-500">📧 အကောင့်: <span class="font-mono">${o.customerEmail || o.customerPhone}</span> • 📍 ${o.customerAddress}</p>
+              <p class="text-xs font-bold mt-1">👤 ${escapeHtml(o.customerName)} | 📞 ${escapeHtml(o.customerPhone)}</p>
+              <p class="text-[11px] text-slate-500">📧 အကောင့်: <span class="font-mono">${escapeHtml(o.customerEmail || o.customerPhone)}</span> • 📍 ${escapeHtml(o.customerAddress)}</p>
             </div>
             <div class="text-right">
               <p class="font-extrabold text-sm">${formatMMK(o.totalAmount)}</p>
@@ -2656,7 +2850,7 @@
             </div>
           </div>
           <div class="flex flex-wrap gap-1.5">
-            ${(o.items || []).map(i => `<span class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-medium">${i.emoji || '📦'} ${i.name} × <strong>${i.qty}</strong> (${formatMMK(i.price * i.qty)})</span>`).join('')}
+            ${(o.items || []).map(i => `<span class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-medium">${i.emoji || '📦'} ${escapeHtml(i.name)} × <strong>${i.qty}</strong> (${formatMMK(i.price * i.qty)})</span>`).join('')}
           </div>
           <div class="flex flex-wrap gap-2 pt-1">
             <button type="button" onclick="verifyWavePayStep1('${o.orderId}')" ${o.paymentVerified ? 'disabled' : ''} class="px-3 py-1.5 rounded-xl text-xs font-bold ${o.paymentVerified ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-500 text-slate-950'}">
@@ -2688,7 +2882,7 @@
       });
 
       if (users.length === 0) {
-        container.innerHTML = `<div class="col-span-full p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold">👥 ဝယ်ယူသူ အကောင့် မတွေ့ရှိပါ</div>`;
+        container.innerHTML = `<div class="col-span-full p-8 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold">👥 အကောင့်ဖွင့်ထားသော ဝယ်ယူသူ မရှိသေးပါ</div>`;
         return;
       }
 
@@ -2707,10 +2901,10 @@
                 </div>
                 <div>
                   <div class="flex items-center gap-1.5">
-                    <h4 class="font-extrabold text-xs sm:text-sm">${u.name}</h4>
-                    <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 font-mono text-[10px] font-bold text-indigo-600 dark:text-indigo-400">#${u.id}</span>
+                    <h4 class="font-extrabold text-xs sm:text-sm">${escapeHtml(u.name)}</h4>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 font-mono text-[10px] font-bold text-indigo-600 dark:text-indigo-400">#${escapeHtml(u.id)}</span>
                   </div>
-                  <p class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">● Auto-Login Account • နောက်ဆုံးဝင်ချိန်: ${u.lastLoginAt || u.createdAt}</p>
+                  <p class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">● Auto-Login Account • နောက်ဆုံးဝင်ချိန်: ${escapeHtml(u.lastLoginAt || u.createdAt)}</p>
                 </div>
               </div>
               <div class="text-right">
@@ -2723,15 +2917,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-2xl text-xs">
               <div>
                 <p class="text-[10px] text-slate-400">အကောင့် Email / Login ID</p>
-                <p class="font-mono font-bold text-slate-900 dark:text-white break-all">${u.identifier}</p>
+                <p class="font-mono font-bold text-slate-900 dark:text-white break-all">${escapeHtml(u.identifier)}</p>
               </div>
               <div>
                 <p class="text-[10px] text-slate-400">ဆက်သွယ်ရန် ဖုန်းနံပါတ်</p>
-                <p class="font-mono font-bold text-slate-900 dark:text-white">${u.phone}</p>
+                <p class="font-mono font-bold text-slate-900 dark:text-white">${escapeHtml(u.phone)}</p>
               </div>
               <div>
                 <p class="text-[10px] text-slate-400">သိမ်းဆည်းထားသော Password</p>
-                <p class="font-mono font-bold text-indigo-600 dark:text-indigo-400">${u.password}</p>
+                <p class="font-mono font-bold text-indigo-600 dark:text-indigo-400">${escapeHtml(u.password)}</p>
               </div>
               <div>
                 <p class="text-[10px] text-slate-400">စုစုပေါင်း ဝယ်ယူထားသောငွေ</p>
@@ -2739,20 +2933,63 @@
               </div>
               <div class="sm:col-span-2 pt-1 border-t border-slate-200/70 dark:border-slate-700">
                 <p class="text-[10px] text-slate-400">ပို့ဆောင်ရမည့် လိပ်စာ (Delivery Address)</p>
-                <p class="font-semibold text-slate-800 dark:text-slate-200">${u.address}</p>
+                <p class="font-semibold text-slate-800 dark:text-slate-200">${escapeHtml(u.address)}</p>
               </div>
             </div>
 
             <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-              <span>အကောင့်စဖွင့်ချိန်: ${u.createdAt}</span>
-              ${userOrders.length > 0 ? `<span class="text-indigo-600 dark:text-indigo-400 font-bold">နောက်ဆုံးအော်ဒါ: #${userOrders[0].orderId}</span>` : '<span>အော်ဒါမရှိသေးပါ</span>'}
+              <span>အကောင့်စဖွင့်ချိန်: ${escapeHtml(u.createdAt)}</span>
+              ${userOrders.length > 0 ? `<span class="text-indigo-600 dark:text-indigo-400 font-bold">နောက်ဆုံးအော်ဒါ: #${escapeHtml(userOrders[0].orderId)}</span>` : '<span>အော်ဒါမရှိသေးပါ</span>'}
             </div>
           </div>
         `;
       }).join('');
     }
 
-    function openProductModal() {
+    // =====================================================
+    // ADMIN PRODUCT MANAGEMENT (ADD, EDIT, PHOTO, STOCK SYNC)
+    // =====================================================
+    let draftProductModalImage = '';
+
+    async function handleProductModalImageUpload(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const compressed = await compressUploadedImageFile(file, 500, 0.82);
+      if (compressed) {
+        draftProductModalImage = compressed;
+        document.getElementById('prodImageUrlInput').value = '(Uploaded Image Ready)';
+      }
+    }
+
+    function openProductModal(productId = '') {
+      const titleEl = document.getElementById('productModalTitle');
+      document.getElementById('editProductId').value = productId || '';
+      draftProductModalImage = '';
+      if (productId) {
+        const p = appState.products.find(x => x.id === productId);
+        if (p) {
+          titleEl.textContent = '✏️ ကုန်ပစ္စည်း ပြင်ဆင်ရန်';
+          document.getElementById('prodNameInput').value = p.name;
+          document.getElementById('prodCategoryInput').value = p.category;
+          document.getElementById('prodEmojiInput').value = p.emoji || '👕';
+          document.getElementById('prodPriceInput').value = p.price;
+          document.getElementById('prodStockInput').value = p.stock;
+          document.getElementById('prodBadgeInput').value = p.badge || '';
+          document.getElementById('prodImageUrlInput').value = p.imageUrl || '';
+          document.getElementById('prodDescInput').value = p.desc || '';
+          draftProductModalImage = p.imageUrl || '';
+        }
+      } else {
+        titleEl.textContent = '➕ ကုန်ပစ္စည်းအသစ် ထည့်သွင်းရန်';
+        document.getElementById('prodNameInput').value = '';
+        document.getElementById('prodCategoryInput').value = 'Fashion';
+        document.getElementById('prodEmojiInput').value = '🎁';
+        document.getElementById('prodPriceInput').value = 15000;
+        document.getElementById('prodStockInput').value = 10;
+        document.getElementById('prodBadgeInput').value = 'New';
+        document.getElementById('prodImageUrlInput').value = '';
+        document.getElementById('prodDescInput').value = '';
+      }
       document.getElementById('productModalBackdrop').classList.remove('hidden');
     }
 
@@ -2761,17 +2998,57 @@
     }
 
     function saveProductFromModal() {
+      const editId = document.getElementById('editProductId').value.trim();
       const name = document.getElementById('prodNameInput').value.trim();
       const category = document.getElementById('prodCategoryInput').value;
       const emoji = document.getElementById('prodEmojiInput').value.trim() || '🎁';
       const price = Number(document.getElementById('prodPriceInput').value) || 15000;
-      const stock = Number(document.getElementById('prodStockInput').value) || 10;
+      const stock = Math.max(0, Number(document.getElementById('prodStockInput').value) || 0);
+      const badge = document.getElementById('prodBadgeInput').value.trim();
+      const urlVal = document.getElementById('prodImageUrlInput').value.trim();
+      const imageUrl = urlVal && urlVal !== '(Uploaded Image Ready)' ? urlVal : draftProductModalImage;
       const desc = document.getElementById('prodDescInput').value.trim();
 
       if (!name) return;
-      appState.products.unshift({ id: 'P-' + Math.floor(200 + Math.random() * 800), name, category, emoji, price, stock, inStock: stock > 0, desc });
+      if (editId) {
+        const existing = appState.products.find(x => x.id === editId);
+        if (existing) {
+          existing.name = name;
+          existing.category = category;
+          existing.emoji = emoji;
+          existing.price = price;
+          existing.stock = stock;
+          existing.inStock = stock > 0;
+          existing.badge = badge;
+          existing.imageUrl = imageUrl;
+          existing.desc = desc;
+        }
+      } else {
+        appState.products.unshift({
+          id: 'P-' + Math.floor(200 + Math.random() * 800),
+          name,
+          category,
+          emoji,
+          price,
+          stock,
+          inStock: stock > 0,
+          badge,
+          imageUrl,
+          desc
+        });
+      }
       saveState();
       closeProductModal();
+      renderAll();
+      pushLiveNotification('ကုန်ပစ္စည်း သိမ်းဆည်းပြီးပါပြီ', `${name} (${formatMMK(price)}) ကို Customer Storefront တွင် အချိန်နှင့်တစ်ပြေးညီ ပြင်ဆင်ပြီးပါပြီ။`, 'PRODUCT SAVED', 'admin');
+    }
+
+    function adjustAdminProductStock(pid, delta) {
+      const p = appState.products.find(x => x.id === pid);
+      if (!p) return;
+      p.stock = Math.max(0, (Number(p.stock) || 0) + delta);
+      p.inStock = p.stock > 0;
+      saveState();
       renderAll();
     }
 
@@ -2779,15 +3056,29 @@
       const container = document.getElementById('adminProductsList');
       if (!container) return;
       container.innerHTML = appState.products.map(p => `
-        <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <span class="text-2xl">${p.emoji}</span>
-            <div>
-              <h4 class="font-bold text-xs">${p.name}</h4>
-              <p class="text-xs text-slate-500">${formatMMK(p.price)} | Stock: ${p.stock}</p>
+        <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between gap-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl overflow-hidden shrink-0">
+                ${p.imageUrl ? `<img src="${p.imageUrl}" alt="${escapeHtml(p.name)}" class="w-full h-full object-cover" />` : `<span>${p.emoji}</span>`}
+              </div>
+              <div>
+                <h4 class="font-bold text-xs sm:text-sm">${escapeHtml(p.name)}</h4>
+                <p class="text-xs font-extrabold text-indigo-600 dark:text-indigo-400">${formatMMK(p.price)} • <span class="text-slate-500 font-normal">Stock: ${p.stock}</span></p>
+              </div>
             </div>
           </div>
-          <button type="button" onclick="appState.products = appState.products.filter(x=>x.id !== '${p.id}'); saveState(); renderAll();" class="text-rose-500 text-xs font-semibold">ဖျက်ရန်</button>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <div class="flex items-center gap-1">
+              <button type="button" onclick="adjustAdminProductStock('${p.id}', -1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-800 font-bold">-</button>
+              <span class="px-1.5 font-bold">${p.stock}</span>
+              <button type="button" onclick="adjustAdminProductStock('${p.id}', 1)" class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-800 font-bold">+</button>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="openProductModal('${p.id}')" class="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 font-bold">✏️ ပြင်ရန်</button>
+              <button type="button" onclick="appState.products = appState.products.filter(x=>x.id !== '${p.id}'); saveState(); renderAll();" class="px-2 py-1 rounded-lg bg-rose-50 dark:bg-rose-950 text-rose-500 font-semibold">🗑️ ဖျက်ရန်</button>
+            </div>
+          </div>
         </div>
       `).join('');
     }
@@ -2809,8 +3100,12 @@
         requiresSlip: type === 'wallet',
         enabled: true
       });
+      document.getElementById('newPayNameInput').value = '';
+      document.getElementById('newPayPhoneInput').value = '';
+      document.getElementById('newPayHolderInput').value = '';
       saveState();
       renderAll();
+      pushLiveNotification('ငွေပေးချေမှုစနစ်အသစ် ထည့်သွင်းပြီးပါပြီ', `${name} ကို User များဘက်သို့ Sync လုပ်ပြီးပါပြီ။`, 'PAYMENT ADDED', 'admin');
     }
 
     function togglePaymentMethodStatus(id) {
@@ -2828,11 +3123,11 @@
       list.innerHTML = (appState.paymentMethods || []).map(m => `
         <div class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 ${m.enabled ? 'bg-white dark:bg-slate-900' : 'bg-slate-100 opacity-60'} flex flex-col justify-between gap-2">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="text-xl">${m.icon}</span>
+            <div class="flex items-center gap-2.5">
+              ${getPaymentBrandLogoHtml(m.id || m.name, 'w-9 h-9')}
               <div>
-                <h4 class="font-bold text-xs">${m.name}</h4>
-                <p class="font-mono text-[11px] text-indigo-600 dark:text-indigo-400">${m.accountNumber}</p>
+                <h4 class="font-bold text-xs">${escapeHtml(m.name)}</h4>
+                <p class="font-mono text-[11px] text-indigo-600 dark:text-indigo-400">${escapeHtml(m.accountNumber)}</p>
               </div>
             </div>
             <span class="px-2 py-0.5 rounded text-[10px] font-bold ${m.requiresSlip ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">${m.requiresSlip ? 'ပြေစာလို' : 'COD'}</span>
@@ -2869,10 +3164,10 @@
         <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
           <div class="flex justify-between text-[10px] text-slate-400">
             <span>🔔 Push Alert</span>
-            <span>${n.time}</span>
+            <span>${escapeHtml(n.time)}</span>
           </div>
-          <p class="font-bold">${n.title}</p>
-          <p class="text-slate-600 dark:text-slate-300">${n.body}</p>
+          <p class="font-bold">${escapeHtml(n.title)}</p>
+          <p class="text-slate-600 dark:text-slate-300">${escapeHtml(n.body)}</p>
         </div>
       `).join('');
     }
@@ -2923,13 +3218,17 @@
       if (passInp && appState.adminAccount) passInp.value = appState.adminAccount.password;
 
       const tgTokenInp = document.getElementById('telegramBotTokenInput');
+      const tgAuthTokenInp = document.getElementById('telegramAuthBotTokenInput');
       const tgChatInp = document.getElementById('telegramChatIdInput');
       const tgEnabledChk = document.getElementById('telegramEnabledCheck');
       const autoBgChk = document.getElementById('autoBgVerifyToggle');
-      if (tgTokenInp && appState.telegramBot) tgTokenInp.value = appState.telegramBot.botToken || '';
-      if (tgChatInp && appState.telegramBot) tgChatInp.value = appState.telegramBot.chatId || '';
+      if (tgTokenInp && appState.telegramBot) tgTokenInp.value = appState.telegramBot.botToken || PAYMENT_CONFIRM_BOT_TOKEN;
+      if (tgAuthTokenInp && appState.telegramBot) tgAuthTokenInp.value = appState.telegramBot.loginBotToken || USER_LOGIN_BOT_TOKEN;
+      if (tgChatInp && appState.telegramBot) tgChatInp.value = appState.telegramBot.chatId || ADMIN_TELEGRAM_CHAT_ID;
       if (tgEnabledChk && appState.telegramBot) tgEnabledChk.checked = appState.telegramBot.enabled !== false;
       if (autoBgChk) autoBgChk.checked = Boolean(appState.backgroundAutoAdmin);
+
+      document.getElementById('adminOrdersPane').classList.toggle('hidden', appState.adminSubTab !== 'orders');
       const usersPane = document.getElementById('adminUsersPane');
       if (usersPane) usersPane.classList.toggle('hidden', appState.adminSubTab !== 'users');
       document.getElementById('adminProductsPane').classList.toggle('hidden', appState.adminSubTab !== 'products');
@@ -2984,14 +3283,12 @@
         unlockedBar.classList.remove('flex');
         if (custHeaderBtn) custHeaderBtn.classList.remove('hidden');
 
-        // If Customer is already registered/logged in -> Auto-Login directly into Shop!
         if (currentCust) {
           if (authGateSec) authGateSec.classList.add('hidden');
           custSec.classList.remove('hidden');
           customerBottomNav.classList.remove('hidden');
           syncLoggedInCustomerToCheckout();
         } else {
-          // Require Customer Register / Login on first visit
           if (authGateSec) authGateSec.classList.remove('hidden');
           custSec.classList.add('hidden');
           customerBottomNav.classList.add('hidden');
@@ -3008,16 +3305,17 @@
 
     window.addEventListener('storage', (event) => {
       if (event.key === STORAGE_KEY) {
-        loadState();
+        loadState(true);
         renderAll();
       }
     });
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       loadState();
       renderAll();
       startTelegramCallbackPolling();
-      // If URL has ?admin=1, prompt the Admin Email & Password modal (never bypass authentication)
+      await pullCloudSyncSnapshot(true);
+
       const params = new URLSearchParams(window.location.search);
       if (params.get('admin') === '1' || window.location.hash === '#admin') {
         openAdminPinModal();
