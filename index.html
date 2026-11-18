@@ -34,6 +34,27 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    input, textarea, select {
+      color: #0f172a;
+    }
+
+    .dark input, .dark textarea, .dark select {
+      color: #f8fafc;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      -webkit-text-fill-color: #0f172a;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .dark input:-webkit-autofill,
+    .dark input:-webkit-autofill:hover,
+    .dark input:-webkit-autofill:focus {
+      -webkit-text-fill-color: #f8fafc;
+    }
+
     .glass-bar {
       background: var(--surface-light);
       backdrop-filter: blur(16px);
@@ -141,7 +162,7 @@
     <!-- (Shown only when no Customer is saved yet) -->
     <!-- ========================================== -->
     <section id="customerAuthGateSection" class="hidden py-6">
-      <div class="max-w-md mx-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+      <div class="max-w-md mx-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden text-slate-900 dark:text-slate-100">
         <div class="pay-gradient p-6 text-white text-center space-y-1.5">
           <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md mx-auto flex items-center justify-center text-3xl shadow-inner">
             🛍️
@@ -149,6 +170,9 @@
           <h2 class="text-xl font-extrabold tracking-tight">ShweZay Customer အကောင့်</h2>
           <p class="text-xs text-indigo-100 leading-relaxed">
             တစ်ကြိမ် အကောင့်ဖွင့်/ဝင်ထားရုံဖြင့် နောက်တစ်ကြိမ် App ဖွင့်တိုင်း <strong>Auto-Login</strong> စနစ်ဖြင့် အလိုအလျောက် ဝင်ရောက်ပြီး အလွယ်တကူ ဝယ်ယူနိုင်ပါသည်။
+          </p>
+        </div>
+
         <!-- Tabs: Login vs Register (Defaults to Login Screen on entry) -->
         <div class="grid grid-cols-2 p-2 bg-slate-100 dark:bg-slate-800/80 m-4 rounded-2xl">
           <button type="button" id="custAuthTabLoginBtn" onclick="switchCustomerAuthTab('login')" class="py-2 rounded-xl text-xs font-extrabold bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition">
@@ -160,14 +184,14 @@
         </div>
 
         <!-- CUSTOMER LOGIN FORM (Shown First) -->
-        <div id="custLoginFormPane" class="px-6 pb-6 space-y-3.5">
+        <div id="custLoginFormPane" class="px-6 pb-6 space-y-3.5 text-slate-900 dark:text-slate-100">
           <div>
-            <label class="block text-xs font-bold mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
-            <input id="custLoginIdentifierInput" type="text" placeholder="ဖွင့်ထားသော Email သို့မဟုတ် ဖုန်းနံပါတ်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
+            <input id="custLoginIdentifierInput" type="text" placeholder="ဖွင့်ထားသော Email သို့မဟုတ် ဖုန်းနံပါတ်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
           <div>
-            <label class="block text-xs font-bold mb-1">Password (စကားဝှက်) *</label>
-            <input id="custLoginPasswordInput" type="password" placeholder="သင့် Password ရိုက်ထည့်ပါ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Password (စကားဝှက်) *</label>
+            <input id="custLoginPasswordInput" type="password" placeholder="သင့် Password ရိုက်ထည့်ပါ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
           <div class="flex items-center gap-2 pt-1">
             <input type="checkbox" checked disabled class="rounded text-indigo-600" />
@@ -183,22 +207,22 @@
         </div>
 
         <!-- CUSTOMER REGISTER FORM -->
-        <div id="custRegisterFormPane" class="hidden px-6 pb-6 space-y-3.5">
+        <div id="custRegisterFormPane" class="hidden px-6 pb-6 space-y-3.5 text-slate-900 dark:text-slate-100">
           <div>
-            <label class="block text-xs font-bold mb-1">ဝယ်ယူသူ အမည် (Full Name) *</label>
-            <input id="custRegNameInput" type="text" placeholder="ဥပမာ - မနှင်းသက်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">ဝယ်ယူသူ အမည် (Full Name) *</label>
+            <input id="custRegNameInput" type="text" placeholder="ဥပမာ - မနှင်းသက်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
           <div>
-            <label class="block text-xs font-bold mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
-            <input id="custRegIdentifierInput" type="text" placeholder="09-450012345 သို့မဟုတ် user@gmail.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
+            <input id="custRegIdentifierInput" type="text" placeholder="09-450012345 သို့မဟုတ် user@gmail.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
           <div>
-            <label class="block text-xs font-bold mb-1">Password (စကားဝှက်) *</label>
-            <input id="custRegPasswordInput" type="password" placeholder="အနည်းဆုံး ၄ လုံး ရိုက်ထည့်ပါ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Password (စကားဝှက်) *</label>
+            <input id="custRegPasswordInput" type="password" placeholder="အနည်းဆုံး ၄ လုံး ရိုက်ထည့်ပါ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
           <div>
-            <label class="block text-xs font-bold mb-1">ပို့ဆောင်ရမည့် လိပ်စာ (Delivery Address) *</label>
-            <input id="custRegAddressInput" type="text" placeholder="မြို့နယ်၊ လမ်း၊ အိမ်အမှတ်..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">ပို့ဆောင်ရမည့် လိပ်စာ (Delivery Address) *</label>
+            <input id="custRegAddressInput" type="text" placeholder="မြို့နယ်၊ လမ်း၊ အိမ်အမှတ်..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
           <div class="flex items-center gap-2 pt-1">
             <input id="custRegAutoLoginCheck" type="checkbox" checked disabled class="rounded text-indigo-600" />
