@@ -149,21 +149,41 @@
           <h2 class="text-xl font-extrabold tracking-tight">ShweZay Customer အကောင့်</h2>
           <p class="text-xs text-indigo-100 leading-relaxed">
             တစ်ကြိမ် အကောင့်ဖွင့်/ဝင်ထားရုံဖြင့် နောက်တစ်ကြိမ် App ဖွင့်တိုင်း <strong>Auto-Login</strong> စနစ်ဖြင့် အလိုအလျောက် ဝင်ရောက်ပြီး အလွယ်တကူ ဝယ်ယူနိုင်ပါသည်။
+        <!-- Tabs: Login vs Register (Defaults to Login Screen on entry) -->
+        <div class="grid grid-cols-2 p-2 bg-slate-100 dark:bg-slate-800/80 m-4 rounded-2xl">
+          <button type="button" id="custAuthTabLoginBtn" onclick="switchCustomerAuthTab('login')" class="py-2 rounded-xl text-xs font-extrabold bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition">
+            🔑 အကောင့်ဝင်ရန် (Login)
+          </button>
+          <button type="button" id="custAuthTabRegisterBtn" onclick="switchCustomerAuthTab('register')" class="py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 transition">
+            ✨ အကောင့်အသစ်ဖွင့်ရန် (Register)
+          </button>
+        </div>
+
+        <!-- CUSTOMER LOGIN FORM (Shown First) -->
+        <div id="custLoginFormPane" class="px-6 pb-6 space-y-3.5">
+          <div>
+            <label class="block text-xs font-bold mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
+            <input id="custLoginIdentifierInput" type="text" placeholder="ဖွင့်ထားသော Email သို့မဟုတ် ဖုန်းနံပါတ်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1">Password (စကားဝှက်) *</label>
+            <input id="custLoginPasswordInput" type="password" placeholder="သင့် Password ရိုက်ထည့်ပါ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div class="flex items-center gap-2 pt-1">
+            <input type="checkbox" checked disabled class="rounded text-indigo-600" />
+            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">✔ နောက်တစ်ကြိမ် ပြန်ဝင်တိုင်း Login ထပ်ဝင်စရာမလိုဘဲ Auto ဝင်မည်</span>
+          </div>
+          <p id="custLoginErrorText" class="hidden text-xs text-rose-500 font-bold text-center"></p>
+          <button type="button" onclick="handleCustomerLogin()" class="w-full py-3 rounded-2xl pay-gradient text-white font-extrabold text-xs sm:text-sm shadow-md hover:opacity-95 transition">
+            🔑 အကောင့်ဝင်ပြီး သိမ်းဆည်းမည် (Auto-Login)
+          </button>
+          <p class="text-center text-[11px] text-slate-500 dark:text-slate-400 pt-1">
+            အကောင့်မရှိသေးပါက <button type="button" onclick="switchCustomerAuthTab('register')" class="text-indigo-600 dark:text-indigo-400 font-bold underline">အကောင့်အသစ်ဖွင့်ရန် (Register)</button> ကို နှိပ်ပါ။
           </p>
         </div>
 
-        <!-- Tabs: Register vs Login -->
-        <div class="grid grid-cols-2 p-2 bg-slate-100 dark:bg-slate-800/80 m-4 rounded-2xl">
-          <button type="button" id="custAuthTabRegisterBtn" onclick="switchCustomerAuthTab('register')" class="py-2 rounded-xl text-xs font-extrabold bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm transition">
-            ✨ အကောင့်အသစ်ဖွင့်ရန် (Register)
-          </button>
-          <button type="button" id="custAuthTabLoginBtn" onclick="switchCustomerAuthTab('login')" class="py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 transition">
-            🔑 အကောင့်ဝင်ရန် (Login)
-          </button>
-        </div>
-
         <!-- CUSTOMER REGISTER FORM -->
-        <div id="custRegisterFormPane" class="px-6 pb-6 space-y-3.5">
+        <div id="custRegisterFormPane" class="hidden px-6 pb-6 space-y-3.5">
           <div>
             <label class="block text-xs font-bold mb-1">ဝယ်ယူသူ အမည် (Full Name) *</label>
             <input id="custRegNameInput" type="text" placeholder="ဥပမာ - မနှင်းသက်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
@@ -187,26 +207,6 @@
           <p id="custRegErrorText" class="hidden text-xs text-rose-500 font-bold text-center"></p>
           <button type="button" onclick="handleCustomerRegister()" class="w-full py-3 rounded-2xl pay-gradient text-white font-extrabold text-xs sm:text-sm shadow-md hover:opacity-95 transition">
             🚀 အကောင့်ဖွင့်ပြီး ဈေးဝယ်စတင်မည် (Auto-Login Save)
-          </button>
-        </div>
-
-        <!-- CUSTOMER LOGIN FORM -->
-        <div id="custLoginFormPane" class="hidden px-6 pb-6 space-y-3.5">
-          <div>
-            <label class="block text-xs font-bold mb-1">Email သို့မဟုတ် ဖုန်းနံပါတ် *</label>
-            <input id="custLoginIdentifierInput" type="text" placeholder="ဖွင့်ထားသော Email သို့မဟုတ် ဖုန်းနံပါတ်" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold mb-1">Password (စကားဝှက်) *</label>
-            <input id="custLoginPasswordInput" type="password" placeholder="သင့် Password ရိုက်ထည့်ပါ" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          </div>
-          <div class="flex items-center gap-2 pt-1">
-            <input type="checkbox" checked disabled class="rounded text-indigo-600" />
-            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">✔ နောက်တစ်ကြိမ် ပြန်ဝင်တိုင်း Login ထပ်ဝင်စရာမလိုဘဲ Auto ဝင်မည်</span>
-          </div>
-          <p id="custLoginErrorText" class="hidden text-xs text-rose-500 font-bold text-center"></p>
-          <button type="button" onclick="handleCustomerLogin()" class="w-full py-3 rounded-2xl pay-gradient text-white font-extrabold text-xs sm:text-sm shadow-md hover:opacity-95 transition">
-            🔑 အကောင့်ဝင်ပြီး သိမ်းဆည်းမည် (Auto-Login)
           </button>
         </div>
       </div>
@@ -636,17 +636,17 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <div>
                 <label for="buyerNameInput" class="block text-xs font-semibold mb-1">ဝယ်ယူသူ အမည် *</label>
-                <input id="buyerNameInput" type="text" placeholder="ဥပမာ - မနှင်းသက်" value="မနှင်းသက် (Ma Hnin)" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
+                <input id="buyerNameInput" type="text" placeholder="ဝယ်ယူသူ အမည်" value="" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
               </div>
               <div>
                 <label for="buyerPhoneInput" class="block text-xs font-semibold mb-1">ဆက်သွယ်ရန် ဖုန်းနံပါတ် *</label>
-                <input id="buyerPhoneInput" type="text" placeholder="09-xxx-xxx-xxx" value="09-450012345" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
+                <input id="buyerPhoneInput" type="text" placeholder="09-xxx-xxx-xxx" value="" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono" />
               </div>
             </div>
 
             <div>
               <label for="buyerAddressInput" class="block text-xs font-semibold mb-1">ပို့ဆောင်ရမည့် လိပ်စာ / မှတ်ချက် *</label>
-              <input id="buyerAddressInput" type="text" placeholder="မြို့နယ်၊ လမ်း၊ အိမ်အမှတ်..." value="အမှတ် (၁၂)၊ ပြည်လမ်း၊ ကမာရွတ်မြို့နယ်၊ ရန်ကုန်" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
+              <input id="buyerAddressInput" type="text" placeholder="မြို့နယ်၊ လမ်း၊ အိမ်အမှတ်..." value="" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs" />
             </div>
           </div>
         </div>
@@ -887,7 +887,7 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'shwezay_multipayment_shop_v3';
+    const STORAGE_KEY = 'shwezay_multipayment_shop_v4';
 
     const DEFAULT_PRODUCTS = [
       { id: 'P-101', name: 'Premium Cotton Oversized Tee', category: 'Fashion', price: 25000, stock: 14, inStock: true, emoji: '👕', badge: 'Best Seller', desc: '100% ချည်သားအစစ်၊ ဝတ်ရပေါ့ပါးသော Oversized အင်္ကျီ' },
@@ -1018,8 +1018,9 @@
         lastUpdateId: 0
       },
       customers: [],
-      currentCustomerId: 'USR-1002',
-      customerAuthMode: 'register',
+      currentCustomerId: '',
+      explicitlyLoggedIn: false,
+      customerAuthMode: 'login',
       merchant: {
         shopName: 'ShweZay Mall',
         wavePhone: '09-977-888-999',
@@ -1546,12 +1547,16 @@
           if (!appState.telegramBot) {
             appState.telegramBot = { enabled: true, botToken: '', chatId: '' };
           }
+          if (!appState.explicitlyLoggedIn) {
+            appState.currentCustomerId = '';
+          }
         } else {
           appState.paymentMethods = JSON.parse(JSON.stringify(DEFAULT_PAYMENT_METHODS));
           appState.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
           appState.orders = JSON.parse(JSON.stringify(DEFAULT_ORDERS));
           appState.customers = JSON.parse(JSON.stringify(DEFAULT_CUSTOMERS));
-          appState.currentCustomerId = 'USR-1002';
+          appState.currentCustomerId = '';
+          appState.explicitlyLoggedIn = false;
           appState.orders[0].slipDataUrl = generateWaveSlipSvgDataUrl('738291', 41500, '09-977-888-999', 'KBZPay');
           appState.notifications = [];
         }
@@ -1560,6 +1565,8 @@
         appState.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
         appState.orders = JSON.parse(JSON.stringify(DEFAULT_ORDERS));
         appState.customers = JSON.parse(JSON.stringify(DEFAULT_CUSTOMERS));
+        appState.currentCustomerId = '';
+        appState.explicitlyLoggedIn = false;
       }
 
       // Admin NEVER auto-logs in! Always start in Customer POV and require Admin Email & Password every time.
@@ -1748,6 +1755,7 @@
 
       appState.customers.unshift(newCustomer);
       appState.currentCustomerId = newCustomer.id;
+      appState.explicitlyLoggedIn = true;
       syncLoggedInCustomerToCheckout();
       saveState();
       renderAll();
@@ -1783,6 +1791,7 @@
 
       found.lastLoginAt = 'ယနေ့ ' + getNowTimeLabel();
       appState.currentCustomerId = found.id;
+      appState.explicitlyLoggedIn = true;
       syncLoggedInCustomerToCheckout();
       saveState();
       renderAll();
@@ -1839,7 +1848,7 @@
     // CUSTOMER REGISTER / LOGIN & PERMANENT AUTO-LOGIN
     // =====================================================
     function getCurrentCustomer() {
-      if (!appState.currentCustomerId) return null;
+      if (!appState.currentCustomerId || !appState.explicitlyLoggedIn) return null;
       return (appState.customers || []).find(u => u.id === appState.currentCustomerId) || null;
     }
 
@@ -1849,13 +1858,17 @@
       if (headerLabel) {
         headerLabel.textContent = cust ? `${cust.name.split(' ')[0]} ✓` : 'အကောင့်ဝင်ရန်';
       }
+      const nameInp = document.getElementById('buyerNameInput');
+      const phoneInp = document.getElementById('buyerPhoneInput');
+      const addrInp = document.getElementById('buyerAddressInput');
       if (cust) {
-        const nameInp = document.getElementById('buyerNameInput');
-        const phoneInp = document.getElementById('buyerPhoneInput');
-        const addrInp = document.getElementById('buyerAddressInput');
         if (nameInp) nameInp.value = cust.name;
         if (phoneInp) phoneInp.value = cust.phone || cust.identifier;
         if (addrInp) addrInp.value = cust.address;
+      } else {
+        if (nameInp) nameInp.value = '';
+        if (phoneInp) phoneInp.value = '';
+        if (addrInp) addrInp.value = '';
       }
     }
 
@@ -1940,6 +1953,7 @@
         existing.address = address;
         existing.lastLoginAt = 'ယနေ့ ' + getNowTimeLabel();
         appState.currentCustomerId = existing.id;
+        appState.explicitlyLoggedIn = true;
       } else {
         const newUser = {
           id: 'USR-' + Math.floor(1003 + Math.random() * 8990),
@@ -1953,6 +1967,7 @@
         };
         appState.customers.unshift(newUser);
         appState.currentCustomerId = newUser.id;
+        appState.explicitlyLoggedIn = true;
       }
 
       saveState();
@@ -1979,6 +1994,7 @@
 
       found.lastLoginAt = 'ယနေ့ ' + getNowTimeLabel();
       appState.currentCustomerId = found.id;
+      appState.explicitlyLoggedIn = true;
       saveState();
       syncLoggedInCustomerToCheckout();
       closeCustomerAuthModal();
@@ -2001,9 +2017,11 @@
 
     function logoutCustomerAccount() {
       appState.currentCustomerId = '';
+      appState.explicitlyLoggedIn = false;
       saveState();
       syncLoggedInCustomerToCheckout();
-      openCustomerAuthModal();
+      closeCustomerAuthModal();
+      switchCustomerAuthTab('login');
       renderAll();
     }
 
